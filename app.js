@@ -1,0 +1,19 @@
+var express = require('express')
+
+var app = express();
+
+app.use(express.static('public'))
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + "/page/main.html")
+})
+app.get('/signIn', (req, res) => {
+    res.sendFile(__dirname + "/page/signIn.html")
+})
+app.get('/signUp', (req, res) => {
+    res.sendFile(__dirname + "/page/signUp.html")
+})
+
+app.listen(3000, () => {
+    console.log("server opened on port 3000");
+})

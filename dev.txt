@@ -1,0 +1,8 @@
+designs
+버튼 hover시 마우스 포인터 손가락으로 변경하기
+
+
+operations
+nav/Auctions 하단메뉴 : 진행 경매, 결매 결과
+nav/Sell : 상품등록 페이지 바로 연결
+nav/About : 서비스 정보 페이지 바로 연결
