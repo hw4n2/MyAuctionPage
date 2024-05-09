@@ -1,6 +1,40 @@
 #loginFormArea{
     display:flex;
+    gap: 20px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+#loginText{
+    font-size: 40px;
+    padding: 95px 50px 20px 50px;
+}
+#idInput{
+    width: 500px;
+    height: 50px;
+    font-size: 21px;
+    padding-left: 10px;
+    border-radius: 4px;
+}
+#pwInput{
+    width: 500px;
+    height: 50px;
+    font-size: 21px;
+    padding-left: 10px;
+    border-radius: 4px;
+}
+#loginBtn{
+    width: 500px;
+    height: 40px;
+    font-size: 21px;
+    border-radius: 4px;
+    background-color: mediumturquoise;
+    color: white;
+    padding: 15px 8px 5px 7px;
+    text-align: center;
+}
+#signUpBtn{
+    color: black;
+    font-size: 16px;
 }

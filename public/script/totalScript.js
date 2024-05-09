@@ -4,12 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = '/';
     });
 
-    let loginBtn = document.getElementById("loginBtn");
+    let loginBtn = document.getElementById("to_login");
     loginBtn.addEventListener("click", function () {
         window.location.href = '/signIn';
     });
 
-    let signUpBtn = document.getElementById("signUpBtn");
+    let signUpBtn = document.getElementById("to_signUp");
     signUpBtn.addEventListener("click", function () {
         window.location.href = '/signUp';
     });
