@@ -1,10 +1,22 @@
 designs
 버튼 hover시 마우스 포인터 손가락으로 변경하기
-아이디/비밀번호 입력창 테두리 회색->포커스 검은색 변경 효과 추가
+아이디/비밀번호 입력창 테두리 회색->호버 검은색 변경 효과 추가
 브라우저 title왼쪽 아이콘?
+회원가입창 가입버튼->필수입력란 다 채우기 전엔 회색/disabled
+header/nav영역 div로 감싸고 fixed넣기
 
 
 operations
 nav/Auctions 하단메뉴 : 진행 경매, 결매 결과
 nav/Sell : 상품등록 페이지 바로 연결
 nav/About : 서비스 정보 페이지 바로 연결
+url post처리
+
+express에서 스크립트 실행법
+
+// 새로고침 요청을 처리하기 위한 라우터
+app.get('/refresh', (req, res) => {
+  // 새로고침을 감지하고 클라이언트에게 스크롤을 최상단으로 이동하도록 지시합니다.
+  res.send('<script>window.scrollTo(0, 0);</script>');
+});
+

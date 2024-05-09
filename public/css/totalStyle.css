@@ -9,11 +9,18 @@ body {
     -khtml-user-drag: none;
     -moz-user-drag: none;
     -o-user-drag: none;
+    
     font-family: "Noto Sans KR", sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
+
+    -ms-overflow-style: none;
 }
+::-webkit-scrollbar {
+    display: none;
+}
+
 img {
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -40,6 +47,11 @@ img {
     left: 5px
 }
 
+
+#header_nav_container{
+    position: fixed;
+    width: 100%;
+}
 /*header*/
 #headerArea {
     display: flex;
@@ -47,6 +59,7 @@ img {
     position: relative;
     justify-content: space-between;
     height: 80px;
+    background-color: white;
 }
 
 .header-rightContainer {
@@ -72,6 +85,7 @@ img {
     height: 40px;
     padding-bottom: 10px;
     border-bottom: 1px solid #bcbcbc;
+    background-color: white;
 }
 
 .navBtn {
@@ -80,4 +94,5 @@ img {
     padding-bottom: 10px;
     font-size: 23px;
     text-align: center;
+    z-index: 1;
 }

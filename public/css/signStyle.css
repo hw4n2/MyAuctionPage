@@ -1,40 +1,89 @@
-#loginFormArea{
+#loginFormArea, #signUpFormArea{
+    /* position:static; */
     display:flex;
     gap: 20px;
+    column-gap: 20px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-bottom: 100px;
+    padding-top: 50px;
 }
 
+/*로그인*/
 #loginText{
     font-size: 40px;
     padding: 95px 50px 20px 50px;
 }
 #idInput{
     width: 500px;
-    height: 50px;
-    font-size: 21px;
+    height: 45px;
+    font-size: 20px;
     padding-left: 10px;
     border-radius: 4px;
 }
-#pwInput{
+#pwInput, #_pwInput{
     width: 500px;
-    height: 50px;
-    font-size: 21px;
+    height: 45px;
+    font-size: 20px;
     padding-left: 10px;
     border-radius: 4px;
 }
 #loginBtn{
     width: 500px;
     height: 40px;
-    font-size: 21px;
+    font-size: 18px;
     border-radius: 4px;
     background-color: mediumturquoise;
     color: white;
     padding: 15px 8px 5px 7px;
     text-align: center;
 }
-#signUpBtn{
+#_to_signUp{
     color: black;
     font-size: 16px;
+}
+
+/*회원가입*/
+#signUpText{
+    width: 465px;
+    height: 50px;
+    font-size: 40px;
+    padding: 95px 50px 40px 0px;
+    text-align: left;
+    border-bottom: 1px solid black;
+    display:flex;
+    flex-direction: row;
+    justify-content: end;
+}
+#signUpBtn{
+    width: 500px;
+    height: 40px;
+    font-size: 18px;
+    border-radius: 4px;
+    background-color: mediumturquoise;
+    color: white;
+    padding: 15px 8px 5px 7px;
+    text-align: center;
+}
+.infoLabel{
+    width: 512px;
+    height: 20px;
+    font-size: 21px;
+    text-align: left;
+    padding-top: 5px;
+}
+#nameInput{
+    width: 500px;
+    height: 45px;
+    font-size: 20px;
+    padding-left: 10px;
+    border-radius: 4px;
+}
+#phoneNumInput{
+    width: 500px;
+    height: 45px;
+    font-size: 20px;
+    padding-left: 10px;
+    border-radius: 4px;
 }
