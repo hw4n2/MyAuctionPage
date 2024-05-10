@@ -13,7 +13,7 @@
 /*로그인*/
 #loginText{
     font-size: 40px;
-    padding: 95px 50px 20px 50px;
+    padding: 150px 50px 20px 50px;
 }
 #idInput{
     width: 500px;
@@ -36,7 +36,7 @@
     border-radius: 4px;
     background-color: mediumturquoise;
     color: white;
-    padding: 15px 8px 5px 7px;
+    padding: 13px 8px 3px 7px;
     text-align: center;
 }
 #_to_signUp{
@@ -63,7 +63,8 @@
     border-radius: 4px;
     background-color: mediumturquoise;
     color: white;
-    padding: 15px 8px 5px 7px;
+    padding: 13px 8px 3px 7px;
+    margin-top: 30px;
     text-align: center;
 }
 .infoLabel{

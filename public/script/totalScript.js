@@ -25,9 +25,5 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = '/curAuctions';
     });
     
-    // window.onload = function() {
-    //   fetch('/refresh');
-    // };
-    
 });
 
