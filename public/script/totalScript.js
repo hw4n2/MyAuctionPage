@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("load", function () {
     
     let logoImg = document.getElementById("logoImg");
     logoImg.addEventListener("click", function () {
@@ -20,10 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = '/signUp';
     });
 
-    let to_auction_btn = document.getElementById("to_auction");
-    to_auction_btn.addEventListener("click", function () {
-        window.location.href = '/curAuctions';
-    });
+    let to_act_btn = document.getElementById("to_auction");
+    to_act_btn.addEventListener("click", function() {
+        window.location.href = '/curAuctions'
+    })
     
 });
 

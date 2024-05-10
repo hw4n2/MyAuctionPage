@@ -1,5 +1,4 @@
 #loginFormArea, #signUpFormArea{
-    /* position:static; */
     display:flex;
     gap: 20px;
     column-gap: 20px;

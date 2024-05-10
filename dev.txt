@@ -20,3 +20,4 @@ app.get('/refresh', (req, res) => {
   res.send('<script>window.scrollTo(0, 0);</script>');
 });
 
+ejs?
