@@ -1,19 +1,35 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const path = require('path');
+const ejs = require('ejs');
+const app = express();
+const db = new Map();
 
 app.use(express.static('public'))
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true}));
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + "/page/main.html");
+    res.render("index", {
+        filename: 'main.ejs'
+    });
 });
 app.get('/signIn', (req, res) => {
-    res.sendFile(__dirname + "/page/signIn.html");
+    res.render("index", {
+        filename: 'signIn.ejs'
+    });
 });
 app.get('/signUp', (req, res) => {
-    res.sendFile(__dirname + "/page/signUp.html");
+    res.render("index", {
+        filename: 'signUp.ejs'
+    });
 });
 app.get('/curAuctions', (req, res) => {
-    res.sendFile(__dirname + "/page/curAuctions.html");
+    res.render("index", {
+        filename: 'curAuctions.ejs'
+    });
 });
 
 
