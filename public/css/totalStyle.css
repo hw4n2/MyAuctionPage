@@ -97,5 +97,5 @@ img {
     padding-bottom: 10px;
     font-size: 23px;
     text-align: center;
-    z-index: 10;
+    display: block;
 }
