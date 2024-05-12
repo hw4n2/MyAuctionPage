@@ -5,30 +5,86 @@ const ejs = require('ejs');
 const app = express();
 const db = new Map();
 
-app.use(express.static('public'))
-app.use(cookieParser());
-app.use(express.urlencoded({ extended: true}));
 app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
+app.use(express.static(path.join(__dirname, 'public')));
+
+const USER_COOKIE_KEY = 'USER';
+app.use(express.urlencoded({ extended: true}));
+app.use(cookieParser());
+app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.render("index", {
-        filename: 'main.ejs'
+    const user = req.cookies[USER_COOKIE_KEY];
+    if(user){
+        const userData = JSON.parse(user);
+        if(db.get(userData.id)){
+            return res.render("index", {
+                userExist: 'login_yes.ejs',
+                filename: 'main.ejs',
+                userId: userData.id
+            });
+        }
+    }
+    
+    return res.render("index", {
+        userExist: 'login_no.ejs',
+        filename: 'main.ejs',
+        userId: 'none'
     });
 });
+
 app.get('/signIn', (req, res) => {
     res.render("index", {
-        filename: 'signIn.ejs'
+        userExist: 'login_no.ejs',
+        filename: 'signIn.ejs',
+        userId: 'none'
     });
 });
+
 app.get('/signUp', (req, res) => {
     res.render("index", {
-        filename: 'signUp.ejs'
+        userExist: 'login_no.ejs',
+        filename: 'signUp.ejs',
+        userId: 'none'
     });
 });
+app.get('/signUpSubmit', (req, res) => { //회원가입 제출시 미들웨어
+    const { id, password, name } = req.body;
+    const exist = db.get(id);
+    if(exist){
+        return res.render('existingId', {error: '이미 사용중인 아이디 입니다.'});
+        // res.send("<script>alert('이미 사용중인 아이디 입니다.')</script>");
+        // res.render("index", {
+        //     userExist: 'login_no.ejs',
+        //     filename: 'signUp.ejs'
+        // });
+        //return;
+    }
+
+    const newUser = { id, password, name };
+    db.set(id, newUser);
+    res.cookie(USER_COOKIE_KEY, JSON.stringify(newUser));
+    res.redirect('/');
+});
+
 app.get('/curAuctions', (req, res) => {
-    res.render("index", {
-        filename: 'curAuctions.ejs'
+    const user = req.cookies[USER_COOKIE_KEY];
+    if(user){
+        const userData = JSON.parse(user);
+        alert(userData);
+        if(db.get(userData.id)){
+            return res.render("index", {
+                userExist: 'login_yes.ejs',
+                filename: 'curActions.ejs',
+                userId: userData.id
+            });
+        }
+    }
+    
+    return res.render("index", {
+        userExist: 'login_no.ejs',
+        filename: 'curActions.ejs',
+        userId: 'none'
     });
 });
 

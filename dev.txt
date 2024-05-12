@@ -10,14 +10,14 @@ operations
 nav/Auctions 하단메뉴 : 진행 경매, 결매 결과
 nav/Sell : 상품등록 페이지 바로 연결
 nav/About : 서비스 정보 페이지 바로 연결
-url post처리
+비밀번호 다시입력
 
-express에서 스크립트 실행법
 
-// 새로고침 요청을 처리하기 위한 라우터
-app.get('/refresh', (req, res) => {
-  // 새로고침을 감지하고 클라이언트에게 스크롤을 최상단으로 이동하도록 지시합니다.
-  res.send('<script>window.scrollTo(0, 0);</script>');
-});
+last comment
+post로하면 에러남
+user객체 전달 안되는듯
 
-ejs?
+개발일지
+특정 페이지에서 버튼클릭안되는 이슈 - 해결중
+회원가입 로직 작성중 req.body가 불려오지 않아 회원정보가 생성되지 않고 undefined로 남아있는 문제 - 해결중
+ ㄴ콘솔로그도 안띄워주고 다음페이지 띄워버림;
