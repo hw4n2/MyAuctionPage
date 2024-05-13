@@ -48,8 +48,9 @@ app.get('/signUp', (req, res) => {
         userId: 'none'
     });
 });
-app.get('/signUpSubmit', (req, res) => { //회원가입 제출시 미들웨어
+app.post('/signUpSubmit', (req, res) => { //회원가입 제출시 미들웨어
     const { id, password, name } = req.body;
+    console.log(req.body);
     const exist = db.get(id);
     if(exist){
         return res.render('existingId', {error: '이미 사용중인 아이디 입니다.'});
@@ -62,7 +63,7 @@ app.get('/signUpSubmit', (req, res) => { //회원가입 제출시 미들웨어
     }
 
     const newUser = { id, password, name };
-    db.set(id, newUser);
+    db.set(newUser.id, newUser);
     res.cookie(USER_COOKIE_KEY, JSON.stringify(newUser));
     res.redirect('/');
 });

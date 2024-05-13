@@ -29,13 +29,14 @@
     border-radius: 4px;
 }
 #loginBtn{
-    width: 500px;
-    height: 40px;
+    width: 515px;
+    height: 55px;
     font-size: 18px;
     border-radius: 4px;
+    border: none;
     background-color: mediumturquoise;
     color: white;
-    padding: 13px 8px 3px 7px;
+    padding: 13px 8px 12px 7px;
     text-align: center;
 }
 #_to_signUp{
@@ -56,13 +57,14 @@
     justify-content: end;
 }
 #signUpBtn{
-    width: 500px;
-    height: 40px;
+    width: 515px;
+    height: 55px;
     font-size: 18px;
     border-radius: 4px;
+    border: none;
     background-color: mediumturquoise;
     color: white;
-    padding: 13px 8px 3px 7px;
+    padding: 13px 8px 12px 7px;
     margin-top: 30px;
     text-align: center;
 }
