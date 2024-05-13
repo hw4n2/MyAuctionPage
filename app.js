@@ -53,12 +53,6 @@ app.post('/signUpSubmit', (req, res) => { //회원가입 제출시 미들웨어
     const exist = db.get(id);
     if(exist){
         return res.render('alert', {error: '이미 사용중인 아이디 입니다.'});
-        // res.send("<script>alert('이미 사용중인 아이디 입니다.')</script>");
-        // res.render("index", {
-        //     userExist: 'login_no.ejs',
-        //     filename: 'signUp.ejs'
-        // });
-        //return;
     }
 
     const newUser = { id, password, name };
@@ -70,11 +64,28 @@ app.post('/signUpSubmit', (req, res) => { //회원가입 제출시 미들웨어
         userId: newUser.id
     });
 });
-// app.post('/signInSubmit', (req, res) => {
 
-// })
+app.post('/signInSubmit', (req, res) => {
+    const { id, password } = req.body;
+    const exist = db.get(id);
+    if(exist){
+        if(exist.password == password){
+            res.cookie(USER_COOKIE_KEY, JSON.stringify(exist));
+            return res.render("index", {
+                userExist: 'login_yes.ejs',
+                filename: 'main.ejs',
+                userId: exist.id
+            })
+        }
+        else{
+            res.render('alert', {error: '비밀번호를 확인해 주세요.'});
+        }
+    }
+    return res.render('alert', {error: '회원정보가 존재하지 않습니다.'});
+})
 
 app.get('/logOutClicked', (req, res) => {
+    res.clearCookie(USER_COOKIE_KEY);
     res.render("index", {
         userExist: 'login_no.ejs',
         filename: 'main.ejs',
