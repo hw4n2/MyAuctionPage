@@ -50,10 +50,10 @@ app.get('/signUp', (req, res) => {
 });
 app.post('/signUpSubmit', (req, res) => { //회원가입 제출시 미들웨어
     const { id, password, name } = req.body;
-    console.log(req.body);
+    console.log(db);
     const exist = db.get(id);
     if(exist){
-        return res.render('existingId', {error: '이미 사용중인 아이디 입니다.'});
+        return res.render('alert', {error: '이미 사용중인 아이디 입니다.'});
         // res.send("<script>alert('이미 사용중인 아이디 입니다.')</script>");
         // res.render("index", {
         //     userExist: 'login_no.ejs',
@@ -65,26 +65,39 @@ app.post('/signUpSubmit', (req, res) => { //회원가입 제출시 미들웨어
     const newUser = { id, password, name };
     db.set(newUser.id, newUser);
     res.cookie(USER_COOKIE_KEY, JSON.stringify(newUser));
-    res.redirect('/');
+    res.render("index", {
+        userExist: 'login_yes.ejs',
+        filename: 'main.ejs',
+        userId: newUser.id
+    });
 });
+// app.post('/signInSubmit', (req, res) => {
+
+// })
+
+app.get('/logOutClicked', (req, res) => {
+    res.render("index", {
+        userExist: 'login_no.ejs',
+        filename: 'main.ejs',
+        userId: 'none'
+    })
+})
 
 app.get('/curAuctions', (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
     if(user){
         const userData = JSON.parse(user);
-        alert(userData);
         if(db.get(userData.id)){
             return res.render("index", {
                 userExist: 'login_yes.ejs',
-                filename: 'curActions.ejs',
+                filename: 'curAuctions.ejs',
                 userId: userData.id
             });
         }
     }
-    
     return res.render("index", {
         userExist: 'login_no.ejs',
-        filename: 'curActions.ejs',
+        filename: 'curAuctions.ejs',
         userId: 'none'
     });
 });
