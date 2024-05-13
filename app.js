@@ -50,7 +50,6 @@ app.get('/signUp', (req, res) => {
 });
 app.post('/signUpSubmit', (req, res) => { //회원가입 제출시 미들웨어
     const { id, password, name } = req.body;
-    console.log(db);
     const exist = db.get(id);
     if(exist){
         return res.render('alert', {error: '이미 사용중인 아이디 입니다.'});
