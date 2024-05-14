@@ -2,8 +2,10 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const ejs = require('ejs');
+const fs = require('fs').promises;
 const app = express();
 const db = new Map();
+const dbFile = 'users.json';
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
