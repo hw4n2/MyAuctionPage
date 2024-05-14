@@ -3,6 +3,8 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const ejs = require('ejs');
 const fs = require('fs').promises;
+const bcrypt = require('bcrypt');
+
 const app = express();
 const db = new Map();
 
@@ -20,8 +22,12 @@ async function fetchUser(id) {
     return user; //객체 리턴
 }
 async function createUser(newUser) {
+    const hashedPassword = await bcrypt.hash(newUser.password, 10);
     const users = await fetchAllUsers();
-    users.push(newUser);
+    users.push({
+        ...newUser,
+        password: hashedPassword,
+    });
     await fs.writeFile(dbFile, JSON.stringify(users));
 }
 
@@ -74,7 +80,7 @@ app.post('/signUpSubmit', async (req, res) => {
         return res.render('alert', {error: '이미 사용중인 아이디 입니다.'});
     }
 
-    const newUser = { id, password, name };
+    const newUser = { id, name }; //유저정보(쿠키)
     await createUser({ id, password, name });
 
     res.cookie(USER_COOKIE_KEY, JSON.stringify(newUser));
@@ -90,7 +96,7 @@ app.post('/signInSubmit', async (req, res) => {
     const { id, password } = req.body;
     const exist = await fetchUser(id);
     if(exist){
-        if(exist.password == password){
+        if(await bcrypt.compare(password, exist.password)){
             res.cookie(USER_COOKIE_KEY, JSON.stringify(exist));
             return res.render("index", {
                 userExist: 'login_yes.ejs',
@@ -100,7 +106,7 @@ app.post('/signInSubmit', async (req, res) => {
             })
         }
         else{
-            res.render('alert', {error: '비밀번호를 확인해 주세요.'});
+            return res.render('alert', {error: '비밀번호를 확인해 주세요.'});
         }
     }
     return res.render('alert', {error: '회원정보가 존재하지 않습니다.'});
@@ -131,6 +137,39 @@ app.get('/curAuctions', (req, res) => {
     return res.render("index", {
         userExist: 'login_no.ejs',
         filename: 'curAuctions.ejs',
+        userId: 'none',
+        message: 'none'
+    });
+});
+app.get('/sells', (req, res) => {
+    const user = req.cookies[USER_COOKIE_KEY];
+    if(user){
+        const userData = JSON.parse(user);
+        return res.render("index", {
+            userExist: 'login_yes.ejs',
+            filename: 'sells.ejs',
+            userId: userData.id,
+            message: 'none'
+        });
+        
+    }
+    return res.render('alert', {error: '로그인 후 이용해 주세요.'});
+});
+app.get('/about', (req, res) => {
+    const user = req.cookies[USER_COOKIE_KEY];
+    if(user){
+        const userData = JSON.parse(user);
+        return res.render("index", {
+            userExist: 'login_yes.ejs',
+            filename: 'about.ejs',
+            userId: userData.id,
+            message: 'none'
+        });
+        
+    }
+    return res.render("index", {
+        userExist: 'login_no.ejs',
+        filename: 'about.ejs',
         userId: 'none',
         message: 'none'
     });

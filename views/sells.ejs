@@ -1,0 +1,30 @@
+<form method="get" action="/prductSubmit">
+    <section id="sellFormArea">
+        <div>
+            <label class="sellFormText" for="productName">제품명</label>
+            <input id="productName" type="text" name="productName" placehoder="판매하시는 상품의 제품명만 입력해 주세요" required>
+        </div>
+        <div>
+            <label class="sellFormText" for="productDetails">상세설명</label>
+            <input id="productDetails" type="text" name="productDetails" placehoder="구매시기, 실사용 기간, 상품 하자 등\n판매하시는 상품의 상태 등을 자세히 입력해 주세요" required>
+        </div>
+        <div>
+            <label class="sellFormText">경매 마감일</label>
+            <div id="periodArea">
+                <input id="period_date" type="date" name="period_date" required>
+                <input id="period_time" type="time" name="period_time" required>
+            </div>
+            <label class="sellFormText">경매 기간:</label>
+        </div>
+        <div id="priceArea">
+            <label class="sellFormText">제품 정가</label>
+            <input id="productPrice" type="number" name="productPrice" required>
+            <label id="won">원</label><br>
+            <label id="priceWarning">&emsp;&emsp;&emsp;✔숫자만 입력해 주세요</label>
+        </div>
+        <div>
+            <input id="productImage" type="image" name="productImage" required>
+        </div>
+        <button id="sellBtn">상품 등록</button>
+    </section>
+</form>

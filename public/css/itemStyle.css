@@ -1,0 +1,56 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+#sellFormArea{
+    display:flex;
+    gap: 20px;
+    column-gap: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 100px;
+    padding-top: 200px;
+}
+
+.sellFormText{
+    font-size: 40px;
+    padding: 150px 50px 20px 50px;
+}
+
+#productName{
+
+}
+#productDetails{
+
+}
+#periodArea{
+    display: flex;
+    flex-direction: row;
+}
+#period_date{
+
+}
+#period_time{
+
+}
+#priceArea{
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+}
+#productPrice{
+
+}
+#productImage{
+
+}
+#sellBtn{
+
+}
