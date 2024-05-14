@@ -22,8 +22,10 @@
    <%- include(userExist) %>
    <%- include(filename) %>
    <script>
-    //let idValue = "<%- userId %>";
-    console.log('<%= userId %>');
+    var message = '<%= message %>';
+    if(message != 'none'){
+        alert(message);
+    }
 </script>
 </body>
 

@@ -21,7 +21,8 @@ app.get('/', (req, res) => {
             return res.render("index", {
                 userExist: 'login_yes.ejs',
                 filename: 'main.ejs',
-                userId: userData.id
+                userId: userData.id,
+                message: 'none'
             });
         }
     }
@@ -29,7 +30,8 @@ app.get('/', (req, res) => {
     return res.render("index", {
         userExist: 'login_no.ejs',
         filename: 'main.ejs',
-        userId: 'none'
+        userId: 'none',
+        message: 'none'
     });
 });
 
@@ -37,7 +39,8 @@ app.get('/signIn', (req, res) => {
     res.render("index", {
         userExist: 'login_no.ejs',
         filename: 'signIn.ejs',
-        userId: 'none'
+        userId: 'none',
+        message: 'none'
     });
 });
 
@@ -45,7 +48,8 @@ app.get('/signUp', (req, res) => {
     res.render("index", {
         userExist: 'login_no.ejs',
         filename: 'signUp.ejs',
-        userId: 'none'
+        userId: 'none',
+        message: 'none'
     });
 });
 app.post('/signUpSubmit', (req, res) => { //회원가입 제출시 미들웨어
@@ -61,7 +65,8 @@ app.post('/signUpSubmit', (req, res) => { //회원가입 제출시 미들웨어
     res.render("index", {
         userExist: 'login_yes.ejs',
         filename: 'main.ejs',
-        userId: newUser.id
+        userId: newUser.id,
+        message: '회원가입되었습니다.'
     });
 });
 
@@ -74,7 +79,8 @@ app.post('/signInSubmit', (req, res) => {
             return res.render("index", {
                 userExist: 'login_yes.ejs',
                 filename: 'main.ejs',
-                userId: exist.id
+                userId: exist.id,
+                message: `${exist.id}님, 환영합니다.`
             })
         }
         else{
@@ -89,7 +95,8 @@ app.get('/logOutClicked', (req, res) => {
     res.render("index", {
         userExist: 'login_no.ejs',
         filename: 'main.ejs',
-        userId: 'none'
+        userId: 'none',
+        message: '로그아웃되었습니다.'
     })
 })
 
@@ -101,14 +108,16 @@ app.get('/curAuctions', (req, res) => {
             return res.render("index", {
                 userExist: 'login_yes.ejs',
                 filename: 'curAuctions.ejs',
-                userId: userData.id
+                userId: userData.id,
+                message: 'none'
             });
         }
     }
     return res.render("index", {
         userExist: 'login_no.ejs',
         filename: 'curAuctions.ejs',
-        userId: 'none'
+        userId: 'none',
+        message: 'none'
     });
 });
 

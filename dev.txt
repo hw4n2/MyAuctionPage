@@ -3,7 +3,7 @@ designs
 아이디/비밀번호 입력창 테두리 회색->호버 검은색 변경 효과 추가
 브라우저 title왼쪽 아이콘?
 회원가입창 가입버튼->필수입력란 다 채우기 전엔 회색/disabled
-header/nav영역 div로 감싸고 fixed넣기
+header/nav영역 div로 감싸고 fixed넣기 O
 
 
 operations
