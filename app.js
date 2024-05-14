@@ -5,30 +5,43 @@ const ejs = require('ejs');
 const fs = require('fs').promises;
 const app = express();
 const db = new Map();
-const dbFile = 'users.json';
+
+const dbFile = 'public/users.json';
+const USER_COOKIE_KEY = 'USER';
+
+async function fetchAllUsers(){
+    const data = await fs.readFile(dbFile);
+    const users = JSON.parse(data.toString());
+    return users; //객체로 구성된 배열 리턴
+}
+async function fetchUser(id) {
+    const users = await fetchAllUsers();
+    const user = users.find((user) => user.id === id);
+    return user; //객체 리턴
+}
+async function createUser(newUser) {
+    const users = await fetchAllUsers();
+    users.push(newUser);
+    await fs.writeFile(dbFile, JSON.stringify(users));
+}
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
-
-const USER_COOKIE_KEY = 'USER';
 app.use(express.urlencoded({ extended: true}));
 app.use(cookieParser());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    const user = req.cookies[USER_COOKIE_KEY];
-    if(user){
-        const userData = JSON.parse(user);
-        if(db.get(userData.id)){
-            return res.render("index", {
-                userExist: 'login_yes.ejs',
-                filename: 'main.ejs',
-                userId: userData.id,
-                message: 'none'
-            });
+    const userCookie = req.cookies[USER_COOKIE_KEY];
+    if(userCookie){
+        const userData = JSON.parse(userCookie);
+        return res.render("index", {
+            userExist: 'login_yes.ejs',
+            filename: 'main.ejs',
+            userId: userData.id,
+            message: 'none'
+        });
         }
-    }
-    
     return res.render("index", {
         userExist: 'login_no.ejs',
         filename: 'main.ejs',
@@ -54,15 +67,16 @@ app.get('/signUp', (req, res) => {
         message: 'none'
     });
 });
-app.post('/signUpSubmit', (req, res) => { //회원가입 제출시 미들웨어
+app.post('/signUpSubmit', async (req, res) => {
     const { id, password, name } = req.body;
-    const exist = db.get(id);
+    const exist = await fetchUser(id);
     if(exist){
         return res.render('alert', {error: '이미 사용중인 아이디 입니다.'});
     }
 
     const newUser = { id, password, name };
-    db.set(newUser.id, newUser);
+    await createUser({ id, password, name });
+
     res.cookie(USER_COOKIE_KEY, JSON.stringify(newUser));
     res.render("index", {
         userExist: 'login_yes.ejs',
@@ -72,9 +86,9 @@ app.post('/signUpSubmit', (req, res) => { //회원가입 제출시 미들웨어
     });
 });
 
-app.post('/signInSubmit', (req, res) => {
+app.post('/signInSubmit', async (req, res) => {
     const { id, password } = req.body;
-    const exist = db.get(id);
+    const exist = await fetchUser(id);
     if(exist){
         if(exist.password == password){
             res.cookie(USER_COOKIE_KEY, JSON.stringify(exist));
@@ -106,14 +120,13 @@ app.get('/curAuctions', (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
     if(user){
         const userData = JSON.parse(user);
-        if(db.get(userData.id)){
-            return res.render("index", {
-                userExist: 'login_yes.ejs',
-                filename: 'curAuctions.ejs',
-                userId: userData.id,
-                message: 'none'
-            });
-        }
+        return res.render("index", {
+            userExist: 'login_yes.ejs',
+            filename: 'curAuctions.ejs',
+            userId: userData.id,
+            message: 'none'
+        });
+        
     }
     return res.render("index", {
         userExist: 'login_no.ejs',
