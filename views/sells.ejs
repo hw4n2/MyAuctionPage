@@ -1,30 +1,34 @@
 <form method="get" action="/prductSubmit">
     <section id="sellFormArea">
-        <div>
-            <label class="sellFormText" for="productName">제품명</label>
-            <input id="productName" type="text" name="productName" placehoder="판매하시는 상품의 제품명만 입력해 주세요" required>
-        </div>
-        <div>
-            <label class="sellFormText" for="productDetails">상세설명</label>
-            <input id="productDetails" type="text" name="productDetails" placehoder="구매시기, 실사용 기간, 상품 하자 등\n판매하시는 상품의 상태 등을 자세히 입력해 주세요" required>
-        </div>
-        <div>
-            <label class="sellFormText">경매 마감일</label>
-            <div id="periodArea">
-                <input id="period_date" type="date" name="period_date" required>
-                <input id="period_time" type="time" name="period_time" required>
-            </div>
-            <label class="sellFormText">경매 기간:</label>
-        </div>
-        <div id="priceArea">
-            <label class="sellFormText">제품 정가</label>
-            <input id="productPrice" type="number" name="productPrice" required>
-            <label id="won">원</label><br>
-            <label id="priceWarning">&emsp;&emsp;&emsp;✔숫자만 입력해 주세요</label>
-        </div>
-        <div>
-            <input id="productImage" type="image" name="productImage" required>
-        </div>
-        <button id="sellBtn">상품 등록</button>
+        <div id="sellText">상품 등록</div><hr><br>
+        <table>
+            <tr>
+                <td><label class="sellFormText" for="productName">제품명</label></td>
+                <td><input id="productName" type="text" name="productName" placeholder="판매하시는 상품의 제품명만 입력해 주세요" required></td>
+            </tr>
+            <tr>
+                <td><label class="sellFormText" for="productDetails" id="detailsText">상세설명<br><br><br><br><br></label></td>
+                <td><textarea id="productDetails" type="text" name="productDetails" placeholder="구매시기, 실사용 기간, 상품 하자 등 판매하시는 상품의 상태를 자세히 입력해 주세요" required></textarea></td>
+            </tr>
+            <tr>
+                <td><label class="sellFormText">제품 정가</label></td>
+                <td><input id="productPrice" type="number" name="productPrice" placeholder="숫자만 입력해 주세요" required>&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;원</td>
+            </tr>
+            <tr>
+                <td><label class="sellFormText">경매 마감일</label></td>
+                <td>
+                    <input id="period_date" type="date" name="period_date" required>&emsp;
+                    <input id="period_time" type="time" name="period_time" required>
+                    <label id="period_result">&emsp;경매 기간 : 등록 직후 ~ </label>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="sellFormText">상품 사진 등록</label></td>
+                <td><input id="productImage" type="image" name="productImage" required></td>
+            </tr>
+            <tr>
+                <td><td><button id="sellBtn">상품 등록</button></td></td>
+            </tr>
+        </table>
     </section>
 </form>

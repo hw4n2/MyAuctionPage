@@ -3,54 +3,86 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 input[type='number'] {
   -moz-appearance: textfield;
   appearance: textfield;
 }
 
-#sellFormArea{
-    display:flex;
-    gap: 20px;
-    column-gap: 20px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 100px;
-    padding-top: 200px;
+td {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
-.sellFormText{
-    font-size: 40px;
-    padding: 150px 50px 20px 50px;
+#sellText {
+  font-size: 50px;
+  padding: 0px 0px 20px 0px;
+  margin-left: 50px;
+  margin-right: 5px;
+  width: 810px;
+  border-bottom: 1px solid black;
 }
 
-#productName{
+#sellFormArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
+  padding-top: 150px;
 }
-#productDetails{
 
+.sellFormText {
+  font-size: 40px;
+  padding: 150px 50px 20px 50px;
 }
-#periodArea{
+
+#productName {
+  height: 50px;
+  width: 500px;
+  font-size: 21px;
+}
+
+#detailsText {}
+
+#productDetails {
+  height: 300px;
+  width: 502px;
+  font-size: 18px;
+  resize: none;
+}
+
+/* #periodArea{
     display: flex;
     flex-direction: row;
-}
-#period_date{
+} */
+#period_date {}
 
-}
-#period_time{
+#period_time {}
 
+#period_result {
+  color: grey;
 }
-#priceArea{
-    display: flex;
-    flex-direction: row;
-    height: 100px;
+  
+#productPrice {
+  width: 400px;
 }
-#productPrice{
 
-}
-#productImage{
+#won {}
 
+#productImage {
+  margin-left: 200px;
 }
-#sellBtn{
 
+#sellBtn {
+  width: 300px;
+  height: 55px;
+  font-size: 18px;
+  border-radius: 4px;
+  border: none;
+  background-color: mediumturquoise;
+  color: white;
+  padding: 13px 8px 12px 7px;
+  margin-top: 30px;
+  text-align: center;
 }
