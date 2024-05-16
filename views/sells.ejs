@@ -1,4 +1,4 @@
-<form method="get" action="/prductSubmit">
+<form method="post" action="/prductSubmit" enctype="multipart/form-data">
     <section id="sellFormArea">
         <div id="sellText">상품 등록</div><hr><br>
         <table>
@@ -12,7 +12,7 @@
             </tr>
             <tr>
                 <td><label class="sellFormText">제품 정가</label></td>
-                <td><input id="productPrice" type="number" name="productPrice" placeholder="숫자만 입력해 주세요" required>&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;원</td>
+                <td><input id="productPrice" type="number" name="productPrice" placeholder="숫자만 입력해 주세요" required>&emsp;&nbsp;&emsp;&nbsp;원</td>
             </tr>
             <tr>
                 <td><label class="sellFormText">경매 마감일</label></td>
@@ -24,7 +24,7 @@
             </tr>
             <tr>
                 <td><label class="sellFormText">상품 사진 등록</label></td>
-                <td><input id="productImage" type="image" name="productImage" required></td>
+                <td><input id="productImage" type="file" name="productImage" required></td>
             </tr>
             <tr>
                 <td><td><button id="sellBtn">상품 등록</button></td></td>
