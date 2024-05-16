@@ -5,17 +5,21 @@ const ejs = require('ejs');
 const fs = require('fs').promises;
 const bcrypt = require('bcrypt');
 const multer = require('multer');
+const uuid4 = require('uuid4');
 
 const app = express();
 const upload = multer({
     storage: multer.diskStorage({
+        filename(req, file, done) {
+            const userCookie = req.cookies[USER_COOKIE_KEY];
+            const userId = JSON.parse(userCookie).id;
+            const randomName = uuid4();
+            const ext = path.extname(file.originalname);
+            const filename = userId + '?' + randomName + ext;
+            done(null, filename);
+        },
         destination(req, file, done) {
             done(null, path.join(__dirname, "public/itemFiles"));
-        },
-        filename(req, file, done) {
-            const ext = path.extname(file.originalname);
-            const filename = file.originalname + ext;
-            done(null, filename);
         },
     }),
 });
@@ -41,6 +45,13 @@ async function createUser(newUser) {
         ...newUser,
         password: hashedPassword,
     });
+    await fs.writeFile(dbFile, JSON.stringify(users));
+}
+async function appendProductData(id, data){
+    const users = await fetchAllUsers();
+    const user = users.find((user) => user.id == id);
+    const pName = data.productName;
+    user.pName = data;
     await fs.writeFile(dbFile, JSON.stringify(users));
 }
 
@@ -168,14 +179,21 @@ app.get('/sells', (req, res) => {
     }
     return res.render('alert', { error: '로그인 후 이용해 주세요.' });
 });
-app.post('/productSubmit', uploadMiddleware, (req, res) => {
+app.post('/productSubmit', uploadMiddleware, async (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
+    const userId = json.parse(user).id;
     if(!user){
         return res.render('alert', { error: '오류가 발생했습니다. 다시 시도해 해주세요. 재로그인이 필요할 수 있습니다.' });
     }
-    const { productName, productDetails, productPrice, period_data, period_time } = req.body;
-    
-
+    const userProduct = req.body;
+    const { productName, productDetails, productPrice, period_data, period_time } = userProduct;
+    await appendProductData(userId, userProduct);
+    return res.render("index", {
+        userExist: 'login_yes.ejs',
+        filename: 'main.ejs',
+        userId: userData.id,
+        message: '상품 등록이 완료되었습니다.'
+    });
 })
 app.get('/about', (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
