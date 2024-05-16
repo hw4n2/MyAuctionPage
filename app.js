@@ -8,18 +8,25 @@ const multer = require('multer');
 const uuid4 = require('uuid4');
 
 const app = express();
+
+app.set('view engine', 'ejs');
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(express.json());
+
 const upload = multer({
     storage: multer.diskStorage({
         filename(req, file, done) {
-            const userCookie = req.cookies[USER_COOKIE_KEY];
-            const userId = JSON.parse(userCookie).id;
+            // const userCookie = req.cookies[USER_COOKIE_KEY];
+            // const userId = JSON.parse(userCookie).id;
             const randomName = uuid4();
             const ext = path.extname(file.originalname);
-            const filename = userId + '?' + randomName + ext;
+            const filename = randomName + ext;
             done(null, filename);
         },
         destination(req, file, done) {
-            done(null, path.join(__dirname, "public/itemFiles"));
+            done(null, "./public/uploads");
         },
     }),
 });
@@ -52,14 +59,12 @@ async function appendProductData(id, data){
     const user = users.find((user) => user.id == id);
     const pName = data.productName;
     user.pName = data;
+    console.log(data);
+
     await fs.writeFile(dbFile, JSON.stringify(users));
 }
 
-app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(express.json());
+
 
 app.get('/', (req, res) => {
     const userCookie = req.cookies[USER_COOKIE_KEY];
@@ -179,9 +184,9 @@ app.get('/sells', (req, res) => {
     }
     return res.render('alert', { error: '로그인 후 이용해 주세요.' });
 });
-app.post('/productSubmit', uploadMiddleware, async (req, res) => {
+app.post('/upload', uploadMiddleware, async (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
-    const userId = json.parse(user).id;
+    const userId = JSON.parse(user).id;
     if(!user){
         return res.render('alert', { error: '오류가 발생했습니다. 다시 시도해 해주세요. 재로그인이 필요할 수 있습니다.' });
     }
@@ -191,7 +196,7 @@ app.post('/productSubmit', uploadMiddleware, async (req, res) => {
     return res.render("index", {
         userExist: 'login_yes.ejs',
         filename: 'main.ejs',
-        userId: userData.id,
+        userId: userId,
         message: '상품 등록이 완료되었습니다.'
     });
 })
