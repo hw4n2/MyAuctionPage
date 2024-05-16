@@ -18,8 +18,6 @@ app.use(express.json());
 const upload = multer({
     storage: multer.diskStorage({
         filename(req, file, done) {
-            // const userCookie = req.cookies[USER_COOKIE_KEY];
-            // const userId = JSON.parse(userCookie).id;
             const randomName = uuid4();
             const ext = path.extname(file.originalname);
             const filename = randomName + ext;
@@ -52,16 +50,14 @@ async function createUser(newUser) {
         ...newUser,
         password: hashedPassword,
     });
-    await fs.writeFile(dbFile, JSON.stringify(users));
+    await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
 }
-async function appendProductData(id, data){
+async function appendProductData(userData, productData){
     const users = await fetchAllUsers();
-    const user = users.find((user) => user.id == id);
-    const pName = data.productName;
-    user.pName = data;
-    console.log(data);
+    const user = users.find((userData) => userData.id == userData.id);
+    user.items.push(productData);
 
-    await fs.writeFile(dbFile, JSON.stringify(users));
+    await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
 }
 
 
@@ -110,9 +106,11 @@ app.post('/signUpSubmit', async (req, res) => {
     }
 
     const newUser = { id, name }; //유저정보(쿠키)
-    await createUser({ id, password, name });
-
-    res.cookie(USER_COOKIE_KEY, JSON.stringify(newUser));
+    res.cookie(USER_COOKIE_KEY, JSON.stringify(newUser, null, 2));
+    newUser.password = password;
+    newUser.items = [];
+    console.log(newUser);
+    await createUser(newUser);
     res.render("index", {
         userExist: 'login_yes.ejs',
         filename: 'main.ejs',
@@ -126,7 +124,7 @@ app.post('/signInSubmit', async (req, res) => {
     const exist = await fetchUser(id);
     if (exist) {
         if (await bcrypt.compare(password, exist.password)) {
-            res.cookie(USER_COOKIE_KEY, JSON.stringify(exist));
+            res.cookie(USER_COOKIE_KEY, JSON.stringify(exist, null, 2));
             return res.render("index", {
                 userExist: 'login_yes.ejs',
                 filename: 'main.ejs',
@@ -188,11 +186,13 @@ app.post('/upload', uploadMiddleware, async (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
     const userId = JSON.parse(user).id;
     if(!user){
-        return res.render('alert', { error: '오류가 발생했습니다. 다시 시도해 해주세요. 재로그인이 필요할 수 있습니다.' });
+        return res.render('alert', { error: '오류가 발생했습니다. 다시 시도해 해주세요.' });
     }
     const userProduct = req.body;
     const { productName, productDetails, productPrice, period_data, period_time } = userProduct;
-    await appendProductData(userId, userProduct);
+    userProduct.imgName = req.file.filename;
+    
+    await appendProductData(user, userProduct);
     return res.render("index", {
         userExist: 'login_yes.ejs',
         filename: 'main.ejs',

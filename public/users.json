@@ -1,1 +1,25 @@
-[{"id":"admin","password":"$2b$10$mKsY9i5urlJ38VfUvaEr0Od2XoMAbr4zOpJsFsDec2.t2n2bI.0A6","name":"김정환"}]
+[
+  {
+    "id": "admin",
+    "name": "da",
+    "password": "$2b$10$BhTPJ/0WwtIIl7Sf7UIT8eLW8oL0EA4ZdRAHb5BsAmzznECNGTfc6",
+    "items": [
+      {
+        "productName": "킥보드",
+        "productDetails": "adf",
+        "productPrice": "123",
+        "period_date": "2024-05-17",
+        "period_time": "01:00",
+        "imgName": "e5e7c05a-2d06-4303-b41d-5f99a31d86b5.png"
+      },
+      {
+        "productName": "ㅁㅇㄻㄴ",
+        "productDetails": "ㅁㅇㄴㄻ",
+        "productPrice": "131313",
+        "period_date": "2024-05-17",
+        "period_time": "01:04",
+        "imgName": "0d01f030-cc0c-41f6-8e4c-317a134aa234.png"
+      }
+    ]
+  }
+]
