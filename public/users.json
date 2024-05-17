@@ -6,20 +6,19 @@
     "items": [
       {
         "productName": "킥보드",
-        "productDetails": "adf",
-        "productPrice": "123",
-        "period_date": "2024-05-17",
-        "period_time": "01:00",
-        "imgName": "e5e7c05a-2d06-4303-b41d-5f99a31d86b5.png"
-      },
-      {
-        "productName": "ㅁㅇㄻㄴ",
-        "productDetails": "ㅁㅇㄴㄻ",
-        "productPrice": "131313",
-        "period_date": "2024-05-17",
-        "period_time": "01:04",
-        "imgName": "0d01f030-cc0c-41f6-8e4c-317a134aa234.png"
+        "productDetails": "킥보드입니다",
+        "productPrice": "120000",
+        "period_date": "2024-05-20",
+        "period_time": "23:07",
+        "imgName": "6846e5a1-e6ac-480e-9907-1a316141965e.png",
+        "isExpired": false
       }
     ]
+  },
+  {
+    "id": "admin2",
+    "name": "dsaf",
+    "password": "$2b$10$8OC.OhLAXzDx0Y4r3XdzMOu/n5VdeakHxU8ZT3qf.csT7kj59aBwG",
+    "items": []
   }
 ]

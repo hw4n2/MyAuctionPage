@@ -6,6 +6,7 @@ const fs = require('fs').promises;
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const uuid4 = require('uuid4');
+const { time } = require('console');
 
 const app = express();
 
@@ -52,17 +53,43 @@ async function createUser(newUser) {
     });
     await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
 }
-async function appendProductData(userData, productData){
+async function appendProductData(userId, productData) {
     const users = await fetchAllUsers();
-    const user = users.find((userData) => userData.id == userData.id);
+    const user = users.find((user) => user.id === userId);
     user.items.push(productData);
 
     await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
 }
 
+async function checkExpiration() {
+    var today = new Date();
+    var dateString = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+    var timeString = ('0' + today.getHours()).slice(-2) + ':' + ('0' + today.getMinutes()).slice(-2) + ":00";
+    var timeValue = new Date(dateString + " " + timeString);
+    const users = await fetchAllUsers();
+
+    let isModified = false;
+    for (let i = 0; i < users.length; i++) {
+        for (let j = 0; j < users[i].items.length; j++) {
+            if (users[i].items[j].isExpired) {
+                continue;
+            }
+            let itemTime = new Date(users[i].items[j].period_date + " " + users[i].items[j].period_time + ":00");
+            if (timeValue.getTime() >= itemTime.getTime()) {
+                users[i].items[j].isExpired = true;
+                console.log(users[i].items[j].productName + " of " + users[i].id + " is expired");
+                isModified = true;
+            }
+        }
+    }
+    if(isModified)
+        await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
+};
+
 
 
 app.get('/', (req, res) => {
+    checkExpiration();
     const userCookie = req.cookies[USER_COOKIE_KEY];
     if (userCookie) {
         const userData = JSON.parse(userCookie);
@@ -106,11 +133,12 @@ app.post('/signUpSubmit', async (req, res) => {
     }
 
     const newUser = { id, name }; //유저정보(쿠키)
-    res.cookie(USER_COOKIE_KEY, JSON.stringify(newUser, null, 2));
+    res.cookie(USER_COOKIE_KEY, JSON.stringify(newUser));
     newUser.password = password;
     newUser.items = [];
     console.log(newUser);
     await createUser(newUser);
+    console.log(newUser.id + " registered");
     res.render("index", {
         userExist: 'login_yes.ejs',
         filename: 'main.ejs',
@@ -124,7 +152,8 @@ app.post('/signInSubmit', async (req, res) => {
     const exist = await fetchUser(id);
     if (exist) {
         if (await bcrypt.compare(password, exist.password)) {
-            res.cookie(USER_COOKIE_KEY, JSON.stringify(exist, null, 2));
+            res.cookie(USER_COOKIE_KEY, JSON.stringify(exist));
+            console.log(id + " log in");
             return res.render("index", {
                 userExist: 'login_yes.ejs',
                 filename: 'main.ejs',
@@ -185,14 +214,16 @@ app.get('/sells', (req, res) => {
 app.post('/upload', uploadMiddleware, async (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
     const userId = JSON.parse(user).id;
-    if(!user){
+    if (!user) {
         return res.render('alert', { error: '오류가 발생했습니다. 다시 시도해 해주세요.' });
     }
     const userProduct = req.body;
-    const { productName, productDetails, productPrice, period_data, period_time } = userProduct;
+    const { productName, productDetails, productPrice, period_date, period_time } = userProduct;
     userProduct.imgName = req.file.filename;
-    
-    await appendProductData(user, userProduct);
+    userProduct.isExpired = false;
+
+    await appendProductData(userId, userProduct);
+    console.log(userId + " is selling " + userProduct.productName);
     return res.render("index", {
         userExist: 'login_yes.ejs',
         filename: 'main.ejs',
