@@ -1,4 +1,4 @@
-<form method="post" action="/upload" enctype="multipart/form-data">
+<form method="post" action="/upload" enctype="multipart/form-data" onsubmit="return submitConfirm()">
     <section id="sellFormArea">
         <div id="sellText">상품 등록</div><hr><br>
         <table>
@@ -17,9 +17,8 @@
             <tr>
                 <td><label class="sellFormText">경매 마감일</label></td>
                 <td>
-                    <input id="period_date" type="date" name="period_date" required>&emsp;
-                    <input id="period_time" type="time" name="period_time" required>
-                    <label id="period_result">&emsp;경매 기간 : 등록 직후 ~ </label>
+                    <input id="expire_date" type="date" name="expire_date" required>&emsp;
+                    <input id="expire_time" type="time" name="expire_time" required>
                 </td>
             </tr>
             <tr>
@@ -30,3 +29,17 @@
         <button id="sellBtn">상품 등록</button>
     </section>
 </form>
+<script>
+    function submitConfirm(){
+        const name = document.getElementById("productName").value;
+        const price = document.getElementById("productPrice").value;
+        const expire_date = document.getElementById("expire_date").value;
+        const expire_time = document.getElementById("expire_time").value;
+        return confirm(`제품명 : ${name}
+가격 : ${price} 원
+경매 종료일 : ${expire_date} ${expire_time}
+위 기한까지 최고 응찰가를 제시한 고객이 낙찰자로 선정됩니다.
+등록하시겠습니까?`
+        );
+    }
+</script>

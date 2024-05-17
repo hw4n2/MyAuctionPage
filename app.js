@@ -56,6 +56,7 @@ async function createUser(newUser) {
 async function appendProductData(userId, productData) {
     const users = await fetchAllUsers();
     const user = users.find((user) => user.id === userId);
+    productData.bidders = [];
     user.items.push(productData);
 
     await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
@@ -74,7 +75,7 @@ async function checkExpiration() {
             if (users[i].items[j].isExpired) {
                 continue;
             }
-            let itemTime = new Date(users[i].items[j].period_date + " " + users[i].items[j].period_time + ":00");
+            let itemTime = new Date(users[i].items[j].expire_date + " " + users[i].items[j].expire_time + ":00");
             if (timeValue.getTime() >= itemTime.getTime()) {
                 users[i].items[j].isExpired = true;
                 console.log(users[i].items[j].productName + " of " + users[i].id + " is expired");
@@ -218,7 +219,7 @@ app.post('/upload', uploadMiddleware, async (req, res) => {
         return res.render('alert', { error: '오류가 발생했습니다. 다시 시도해 해주세요.' });
     }
     const userProduct = req.body;
-    const { productName, productDetails, productPrice, period_date, period_time } = userProduct;
+    const { productName, productDetails, productPrice, expire_date, expire_time } = userProduct;
     userProduct.imgName = req.file.filename;
     userProduct.isExpired = false;
 

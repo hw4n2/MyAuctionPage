@@ -6,12 +6,13 @@
     "items": [
       {
         "productName": "킥보드",
-        "productDetails": "킥보드입니다",
-        "productPrice": "120000",
-        "period_date": "2024-05-20",
-        "period_time": "23:07",
-        "imgName": "6846e5a1-e6ac-480e-9907-1a316141965e.png",
-        "isExpired": false
+        "productDetails": "ㅇㅇ",
+        "productPrice": "12222",
+        "expire_date": "2024-06-01",
+        "expire_time": "14:18",
+        "imgName": "6948a4de-daa3-4bdd-b019-0c6bd201fc06.png",
+        "isExpired": false,
+        "bidders": []
       }
     ]
   },
@@ -19,6 +20,17 @@
     "id": "admin2",
     "name": "dsaf",
     "password": "$2b$10$8OC.OhLAXzDx0Y4r3XdzMOu/n5VdeakHxU8ZT3qf.csT7kj59aBwG",
-    "items": []
+    "items": [
+      {
+        "productName": "킥보드",
+        "productDetails": "ddd",
+        "productPrice": "0",
+        "expire_date": "2024-05-09",
+        "expire_time": "23:25",
+        "imgName": "b2e258be-3312-40c3-87c5-1dd413e5625a.png",
+        "isExpired": true,
+        "bidders": []
+      }
+    ]
   }
 ]
