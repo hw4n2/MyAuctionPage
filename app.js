@@ -83,9 +83,23 @@ async function checkExpiration() {
             }
         }
     }
-    if(isModified)
+    if (isModified)
         await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
 };
+
+async function extractItems(status) {
+    const itemList = [];
+    const users = await fetchAllUsers();
+    for (const user of users) {
+        for (const item of user.items) {
+            if (item.isExpired == status) {
+                item.id = user.id;
+                itemList.push(item);
+            }
+        }
+    }
+    return itemList;
+}
 
 
 
@@ -170,6 +184,9 @@ app.post('/signInSubmit', async (req, res) => {
 })
 
 app.get('/logOutClicked', (req, res) => {
+    const user = req.cookies[USER_COOKIE_KEY];
+    const userData = JSON.parse(user);
+    console.log(userData.id + " log out");
     res.clearCookie(USER_COOKIE_KEY);
     res.render("index", {
         userExist: 'login_no.ejs',
@@ -179,13 +196,16 @@ app.get('/logOutClicked', (req, res) => {
     })
 })
 
-app.get('/curAuctions', (req, res) => {
+app.get(['/curAuctions', '/onsalePage'], async (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
+    const itemList = await extractItems(false);
     if (user) {
         const userData = JSON.parse(user);
         return res.render("index", {
             userExist: 'login_yes.ejs',
             filename: 'curAuctions.ejs',
+            itemPage: 'onsale.ejs',
+            itemList: itemList,
             userId: userData.id,
             message: 'none'
         });
@@ -194,10 +214,38 @@ app.get('/curAuctions', (req, res) => {
     return res.render("index", {
         userExist: 'login_no.ejs',
         filename: 'curAuctions.ejs',
+        itemPage: 'onsale.ejs',
+        itemList: itemList,
         userId: 'none',
         message: 'none'
     });
 });
+app.get('/expiredPage', async (req, res) => {
+    const user = req.cookies[USER_COOKIE_KEY];
+    const itemList = await extractItems(true);
+    if (user) {
+        const userData = JSON.parse(user);
+        return res.render("index", {
+            userExist: 'login_yes.ejs',
+            filename: 'curAuctions.ejs',
+            itemPage: 'expired.ejs',
+            itemList: itemList,
+            userId: userData.id,
+            message: 'none'
+        });
+
+    }
+    return res.render("index", {
+        userExist: 'login_no.ejs',
+        filename: 'curAuctions.ejs',
+        itemPage: 'expired.ejs',
+        itemList: itemList,
+        userId: 'none',
+        message: 'none'
+    });
+});
+
+
 app.get('/sells', (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
     if (user) {

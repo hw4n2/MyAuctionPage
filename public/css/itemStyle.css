@@ -89,8 +89,7 @@ td {
 /*판매페이지 스타일*/
 
 #CAContainer{
-  display: flex;
-  flex-direction: row;
+
   position: relative;
   top: 150px;
   height: 100vh;
@@ -105,4 +104,7 @@ td {
   border-right: 1px solid grey;
   text-align: center;
 
+}
+#curPageTitle{
+  font-size: 30px;
 }
