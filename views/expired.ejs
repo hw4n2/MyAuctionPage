@@ -1,4 +1,73 @@
-<div id="curPageTitle">경매 결과</div>
+<div id="curPageTitle">경매 결과
+    <hr>
+</div>
 <article id="itemArea">
-    
+
 </article>
+<script>
+    const itemList = '<%- JSON.stringify(itemList) %>';
+    const parsedList = JSON.parse(itemList);
+    parsedList.sort((a, b) => {
+        const dateA = new Date(a.expire_date + " " + a.expire_time);
+        const dateB = new Date(b.expire_date + " " + b.expire_time);
+        const now = new Date();
+
+        const diffA = Math.abs(dateA - now);
+        const diffB = Math.abs(dateB - now);
+
+        return diffA - diffB;
+    })
+
+    const container = document.getElementById("itemArea");
+    for (const item of parsedList) {
+        const newDiv = document.createElement('div');
+        newDiv.className = 'itemContainer';
+
+        const newImg = document.createElement('img'); //이미지
+        newImg.className = 'itemImg';
+        newImg.src = `/uploads/${item.imgName}`;
+        //newDiv.appendChild(newImg);
+
+        const infoDiv = document.createElement('div');
+        infoDiv.className = 'infoContainer';
+
+        const newName = document.createElement('div');//제목
+        newName.className = 'itemName';
+        newName.textContent = `제품명 : ${item.productName}`;
+        //infoDiv.appendChild(newName);
+
+        const newId = document.createElement('div');//아이디
+        newId.className = 'userId_item';
+        newId.textContent = `판매자 : ${item.id}`;
+        //infoDiv.appendChild(newId);
+
+        const newPrice = document.createElement('div');//가격
+        newPrice.className = 'itemPrice';
+        newPrice.textContent = `정가 : ${item.productPrice} 원`;
+        //infoDiv.appendChild(newPrice);
+
+        const newPeriod = document.createElement('div');
+        newPeriod.className = 'itemPeriod';
+        const periodText = `경매 마감일 : ${formatDate(item.expire_date)}
+${formatTime(item.expire_time)}`;
+        newPeriod.textContent = periodText;
+
+        infoDiv.append(newName, newId, newPrice, newPeriod);
+        newDiv.append(newImg, infoDiv);
+        container.appendChild(newDiv);
+    }
+
+    function formatDate(inputDate) {
+        const parts = inputDate.split('-');
+        const year = parts[0];
+        const month = parts[1];
+        const day = parts[2];
+        return `${year}년 ${month}월 ${day}일`;
+    }
+    function formatTime(inputTime) {
+        const parts = inputTime.split(':');
+        const hour = parts[0];
+        const minute = parts[1];
+        return `${hour}시 ${minute}분`;
+    }
+</script>

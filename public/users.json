@@ -8,9 +8,29 @@
         "productName": "킥보드",
         "productDetails": "ㅇㅇ",
         "productPrice": "12222",
-        "expire_date": "2024-06-01",
+        "expire_date": "2024-05-01",
         "expire_time": "14:18",
         "imgName": "6948a4de-daa3-4bdd-b019-0c6bd201fc06.png",
+        "isExpired": true,
+        "bidders": []
+      },
+      {
+        "productName": "킥보드",
+        "productDetails": "ㅁㅇㄹ",
+        "productPrice": "213",
+        "expire_date": "2024-07-20",
+        "expire_time": "02:09",
+        "imgName": "9ddad1e8-0d61-4117-8920-fcb21b673f1d.png",
+        "isExpired": false,
+        "bidders": []
+      },
+      {
+        "productName": "ㅁㄴㅇㄻㄴㄹ",
+        "productDetails": "ㅁㅇㄹ",
+        "productPrice": "32424234234",
+        "expire_date": "2024-05-31",
+        "expire_time": "07:58",
+        "imgName": "6e6b1b97-8616-4b68-b3ca-dcaeca674e40.png",
         "isExpired": false,
         "bidders": []
       }
@@ -25,10 +45,10 @@
         "productName": "킥보드",
         "productDetails": "ddd",
         "productPrice": "0",
-        "expire_date": "2024-05-09",
+        "expire_date": "2024-07-09",
         "expire_time": "23:25",
         "imgName": "b2e258be-3312-40c3-87c5-1dd413e5625a.png",
-        "isExpired": true,
+        "isExpired": false,
         "bidders": []
       }
     ]

@@ -196,7 +196,7 @@ app.get('/logOutClicked', (req, res) => {
     })
 })
 
-app.get(['/curAuctions', '/onsalePage'], async (req, res) => {
+app.get('/curAuctions', async (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
     const itemList = await extractItems(false);
     if (user) {

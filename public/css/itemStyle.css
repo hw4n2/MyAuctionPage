@@ -106,5 +106,41 @@ td {
 
 }
 #curPageTitle{
-  font-size: 30px;
+  position: fixed;
+  font-size: 40px;
+  left: 200px;
+  top: 120px;
+  width: 80%;
+  height: 80px;
+  padding-top: 50px;
+  background-color: white;
+}
+#itemArea{
+  position: absolute;
+  z-index: -1;
+  left: 200px;
+  width: 1190px;
+  padding-top: 140px;
+  padding-bottom: 50px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+
+.itemImg{
+  height: 200px;
+  width: 170px;
+}
+.itemContainer{
+  display:flex;
+  flex-direction: row;
+  height: 200px;
+  width: 480px;
+}
+.infoContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
 }
