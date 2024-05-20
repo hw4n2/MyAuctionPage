@@ -44,6 +44,7 @@
 
         const infoDiv = document.createElement('div');
         infoDiv.className = 'infoContainer';
+        infoDiv.style = "border-left: 1px solid grey";
 
         const infoHeader = document.createElement('div');
         infoHeader.className = 'infoHeader';
@@ -65,28 +66,26 @@
         periodDate.className = 'itemPeriod';
         periodDate.innerHTML = '마감 : ' + formatDate(item.expire_date) + '<br>&nbsp;&nbsp;&emsp;&emsp;' + formatTime(item.expire_time);
 
-        //const detailBtn = document.createElement('button');//상세보기
-        //detailBtn.className = 'showDetailBtn';
-        //detailBtn.innerHTML = "상세보기";
-
-        infoDiv.append(infoHeader, newName, newId, newPrice, periodDate);
+        const nullDiv = document.createElement('div');
+        nullDiv.style = "height: 5%";
+        infoDiv.append(infoHeader, nullDiv, newName, newId, newPrice, periodDate);
         newDiv.append(newImg, infoDiv);
-        newDiv.addEventListener("click", function () {
-            fetch('/itemDetails', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(item)
-            })
-            .then(response => response.text())  
-            .then(html => {
-                document.open();
-                document.write(html);
-                document.close();
-            })
-        })
+
         container.appendChild(newDiv);
+        newDiv.addEventListener("click", function () {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = "/itemDetails";
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'item';
+            input.value = JSON.stringify(item);
+            form.appendChild(input);
+
+            document.body.appendChild(form);
+            form.submit();
+        })
+        
     }
 
     function formatDate(inputDate) {

@@ -91,14 +91,14 @@ td {
 #CAContainer{
   display: flex;
   flex-direction: row;
-  position: relative;
+  position: absolute;
   top: 150px;
   height: 100vh;
 }
 #sidebox{
   position: fixed;
-  top: 300px;
-  left: 50px;
+  top: 350px;
+  left: 40px;
   width: 100px;
   height: 70px;
   padding-bottom: 5px;
@@ -109,7 +109,7 @@ td {
 #curPageTitle{
   position: fixed;
   font-size: 40px;
-  left: 200px;
+  left: 300px;
   top: 120px;
   width: 80%;
   height: 80px;
@@ -119,33 +119,73 @@ td {
 #itemArea{
   position: absolute;
   z-index: -1;
-  left: 200px;
-  width: 800px;
+  left: 300px;
+  width: 90vw;
   padding-top: 140px;
   padding-bottom: 50px;
 
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 90px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
 }
 
 
 .itemImg{
-  height: 200px;
-  width: 170px;
+  max-height: 100%;
+  max-width: 100%;
 }
 .itemContainer{
   display:flex;
   flex-direction: row;
-  height: 200px;
-  width: 350px;
+  height: 300px;
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 .infoContainer{
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 30px;
+  padding-left: 30px;
 }
 
 .itemPeriod{
   
+}
+
+/*상세페이지 스타일*/
+#detailArea{
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 150px;
+  left: 100px;
+  height: 80vh;
+
+}
+
+._itemImg{
+
+}
+._infoContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-top: 50px;
+  padding-left: 100px;
+}
+._infoHeader{
+
+}
+._itemName{
+
+}
+._userId_item{
+
+}
+._itemPrice{
+
+}
+._itemPeriod{
+
 }

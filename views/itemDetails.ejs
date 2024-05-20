@@ -1,0 +1,99 @@
+<section id="detailArea">
+    <img id="detailImage">
+    <div id="productInfo"></div>
+</section>
+
+<script>
+    let item = '<%- item %>';
+    item = JSON.parse(item);
+
+    const container = document.getElementById("detailArea");
+    const detailImg = document.createElement('img');
+    detailImg.className = '_itemImg';
+    detailImg.src = `uploads/${item.imgName}`;
+
+    const infoDiv = document.createElement('div');
+    infoDiv.className = '_infoContainer';
+    infoDiv.style = "border-left: 1px solid grey";
+
+    const infoHeader = document.createElement('div');
+    infoHeader.className = '_infoHeader';
+    infoHeader.textContent = to_Dday(item.expire_date);
+
+    const newName = document.createElement('div');//제목
+    newName.className = '_itemName';
+    newName.textContent = `제품명 : ${item.productName}`;
+
+    const newDetail = document.createElement('div');//상세설명
+    newDetail.className = '_itemDetail';
+    newDetail.textContent = `상세설명 : ${item.productDetails}`;
+
+    const newId = document.createElement('div');//아이디
+    newId.className = '_userId_item';
+    newId.textContent = `판매자 : ${item.id}`;
+
+    const newPrice = document.createElement('div');//가격
+    newPrice.className = '_itemPrice';
+    newPrice.textContent = `정가 : ${item.productPrice} 원`;
+
+    const periodDate = document.createElement('div');//마감기간
+    periodDate.className = '_itemPeriod';
+    periodDate.innerHTML = '마감 : ' + formatDate(item.expire_date) + '<br>&nbsp;&nbsp;&emsp;&emsp;' + formatTime(item.expire_time);
+
+    const priceInput = document.createElement('input');
+    priceInput.className = 'priceInput';
+    priceInput.type = 'number';
+    priceInput.name = 'priceInput';
+    priceInput.placeholder = "응찰가";
+    priceInput.required = true;
+
+    const buyBtn = document.createElement('button');
+    buyBtn.className = 'butBtn';
+    buyBtn.textContent = '응찰';
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/bid';
+    form.onsubmit = function submitConfirm(){
+        return confirm(`${priceInput.value} 원에 응찰하시겠습니까?`);
+    };
+
+    const object = document.createElement('input');
+    object.type = 'hidden';
+    object.name = 'item';
+    object.value = JSON.stringify(item);
+    form.appendChild(object);
+
+    infoDiv.append(infoHeader, newId, newName, newDetail, newPrice, periodDate, priceInput, buyBtn);
+    form.appendChild(infoDiv);
+    container.append(detailImg, form);
+
+    function formatDate(inputDate) {
+        const parts = inputDate.split('-');
+        const year = parts[0];
+        const month = parts[1];
+        const day = parts[2];
+        return `${year}년 ${month}월 ${day}일`;
+    }
+    function formatTime(inputTime) {
+        const parts = inputTime.split(':');
+        const hour = parts[0];
+        const minute = parts[1];
+        return `${hour}시 ${minute}분`;
+    }
+    function to_Dday(date) {
+        const today = new Date();
+        const targetDate = new Date(date);
+        const differenceInTime = targetDate - today;
+        const differenceInDays = Math.ceil(differenceInTime / (1000 * 60 * 60 * 24));
+
+        if (differenceInDays > 0) {
+            return `D-${differenceInDays}`;
+        } else if (differenceInDays === 0) {
+            return 'D-0';
+        } else {
+            return `마감(D+${Math.abs(differenceInDays)})`;
+        }
+    }
+
+</script>

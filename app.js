@@ -284,7 +284,7 @@ app.post('/itemDetails', async (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
     if (user) {
         const userId = JSON.parse(user).id;
-        const itemData = req.body;
+        const itemData = req.body.item;
         return res.render("index", {
             userExist: 'login_yes.ejs',
             filename: 'itemDetails.ejs',
@@ -296,9 +296,31 @@ app.post('/itemDetails', async (req, res) => {
     else{
         return res.render('alert', { error: '로그인 후 이용해 주세요.' });
     }
-
-
 })
+
+app.post('/bid', async (req, res) => {
+    const user = req.cookies[USER_COOKIE_KEY];
+    if (user) {
+        const userId = JSON.parse(user).id;
+        const itemList = await extractItems(false);
+
+        const price = req.body.priceInput;
+        const itemData = JSON.parse(req.body.item);
+
+        return res.render("index", {
+            userExist: 'login_yes.ejs',
+            filename: 'curAuctions.ejs',
+            itemPage: 'onsale.ejs',
+            itemList: itemList,
+            userId: userId,
+            message: '응찰이 완료되었습니다.'
+        })
+    }
+    else{
+        return res.render('alert', { error: '로그인 후 이용해 주세요.' });
+    }
+})
+
 app.get('/about', (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
     if (user) {
