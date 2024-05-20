@@ -33,6 +33,46 @@
         "imgName": "6e6b1b97-8616-4b68-b3ca-dcaeca674e40.png",
         "isExpired": false,
         "bidders": []
+      },
+      {
+        "productName": "asdf",
+        "productDetails": "sadf11111",
+        "productPrice": "111",
+        "expire_date": "2024-05-30",
+        "expire_time": "10:30",
+        "imgName": "d31bf026-9bad-4e4e-bfe7-b11085f3aa10.png",
+        "isExpired": false,
+        "bidders": []
+      },
+      {
+        "productName": "asdffdd",
+        "productDetails": "dsfaf",
+        "productPrice": "222",
+        "expire_date": "2024-06-08",
+        "expire_time": "04:25",
+        "imgName": "627bb1a7-da85-45ee-8241-182bf5f005f7.png",
+        "isExpired": false,
+        "bidders": []
+      },
+      {
+        "productName": "gggg",
+        "productDetails": "2e2",
+        "productPrice": "24233",
+        "expire_date": "2024-06-08",
+        "expire_time": "10:31",
+        "imgName": "8654785e-1440-4721-8fff-ca88f39d6a1c.png",
+        "isExpired": false,
+        "bidders": []
+      },
+      {
+        "productName": "dfasf",
+        "productDetails": "432",
+        "productPrice": "453",
+        "expire_date": "2024-05-31",
+        "expire_time": "04:25",
+        "imgName": "ede90808-dc89-4e66-81f2-88326f7b4b2f.png",
+        "isExpired": false,
+        "bidders": []
       }
     ]
   },

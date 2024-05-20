@@ -89,7 +89,8 @@ td {
 /*판매페이지 스타일*/
 
 #CAContainer{
-
+  display: flex;
+  flex-direction: row;
   position: relative;
   top: 150px;
   height: 100vh;
@@ -119,13 +120,13 @@ td {
   position: absolute;
   z-index: -1;
   left: 200px;
-  width: 1190px;
+  width: 800px;
   padding-top: 140px;
   padding-bottom: 50px;
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
+  gap: 90px;
 }
 
 
@@ -137,10 +138,14 @@ td {
   display:flex;
   flex-direction: row;
   height: 200px;
-  width: 480px;
+  width: 350px;
 }
 .infoContainer{
   display: flex;
   flex-direction: column;
-  gap: 35px;
+  gap: 20px;
+}
+
+.itemPeriod{
+  
 }

@@ -18,6 +18,20 @@
 
         return diffA - diffB;
     })
+    function to_Dday(date) {
+        const today = new Date();
+        const targetDate = new Date(date);
+        const differenceInTime = targetDate - today;
+        const differenceInDays = Math.ceil(differenceInTime / (1000 * 60 * 60 * 24));
+
+        if (differenceInDays > 0) {
+            return `D-${differenceInDays}`;
+        } else if (differenceInDays === 0) {
+            return 'D-0';
+        } else {
+            return `마감(D+${Math.abs(differenceInDays)})`;
+        }
+    }
 
     const container = document.getElementById("itemArea");
     for (const item of parsedList) {
@@ -31,6 +45,10 @@
 
         const infoDiv = document.createElement('div');
         infoDiv.className = 'infoContainer';
+
+        const infoHeader = document.createElement('div');
+        infoHeader.className = 'infoHeader';
+        infoHeader.textContent = to_Dday(item.expire_date);
 
         const newName = document.createElement('div');//제목
         newName.className = 'itemName';
@@ -47,13 +65,13 @@
         newPrice.textContent = `정가 : ${item.productPrice} 원`;
         //infoDiv.appendChild(newPrice);
 
-        const newPeriod = document.createElement('div');
-        newPeriod.className = 'itemPeriod';
-        const periodText = `경매 마감일 : ${formatDate(item.expire_date)}
-${formatTime(item.expire_time)}`;
-        newPeriod.textContent = periodText;
+        const periodDate = document.createElement('div');//마감기간
+        periodDate.className = 'itemPeriod';
 
-        infoDiv.append(newName, newId, newPrice, newPeriod);
+        periodDate.innerHTML = '마감 : ' + formatDate(item.expire_date) + '<br>&nbsp;&nbsp;&emsp;&emsp;' + formatTime(item.expire_time);
+
+
+        infoDiv.append(infoHeader, newName, newId, newPrice, periodDate);
         newDiv.append(newImg, infoDiv);
         container.appendChild(newDiv);
     }
