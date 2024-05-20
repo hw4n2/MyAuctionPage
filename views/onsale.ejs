@@ -2,7 +2,7 @@
     <hr>
 </div>
 <article id="itemArea">
-
+    
 </article>
 
 <script>
@@ -41,7 +41,6 @@
         const newImg = document.createElement('img'); //이미지
         newImg.className = 'itemImg';
         newImg.src = `/uploads/${item.imgName}`;
-        //newDiv.appendChild(newImg);
 
         const infoDiv = document.createElement('div');
         infoDiv.className = 'infoContainer';
@@ -53,26 +52,40 @@
         const newName = document.createElement('div');//제목
         newName.className = 'itemName';
         newName.textContent = `제품명 : ${item.productName}`;
-        //infoDiv.appendChild(newName);
 
         const newId = document.createElement('div');//아이디
         newId.className = 'userId_item';
         newId.textContent = `판매자 : ${item.id}`;
-        //infoDiv.appendChild(newId);
 
         const newPrice = document.createElement('div');//가격
         newPrice.className = 'itemPrice';
         newPrice.textContent = `정가 : ${item.productPrice} 원`;
-        //infoDiv.appendChild(newPrice);
 
         const periodDate = document.createElement('div');//마감기간
         periodDate.className = 'itemPeriod';
-
         periodDate.innerHTML = '마감 : ' + formatDate(item.expire_date) + '<br>&nbsp;&nbsp;&emsp;&emsp;' + formatTime(item.expire_time);
 
+        //const detailBtn = document.createElement('button');//상세보기
+        //detailBtn.className = 'showDetailBtn';
+        //detailBtn.innerHTML = "상세보기";
 
         infoDiv.append(infoHeader, newName, newId, newPrice, periodDate);
         newDiv.append(newImg, infoDiv);
+        newDiv.addEventListener("click", function () {
+            fetch('/itemDetails', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(item)
+            })
+            .then(response => response.text())  
+            .then(html => {
+                document.open();
+                document.write(html);
+                document.close();
+            })
+        })
         container.appendChild(newDiv);
     }
 

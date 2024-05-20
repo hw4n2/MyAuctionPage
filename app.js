@@ -280,6 +280,25 @@ app.post('/upload', uploadMiddleware, async (req, res) => {
         message: '상품 등록이 완료되었습니다.'
     });
 })
+app.post('/itemDetails', async (req, res) => {
+    const user = req.cookies[USER_COOKIE_KEY];
+    if (user) {
+        const userId = JSON.parse(user).id;
+        const itemData = req.body;
+        return res.render("index", {
+            userExist: 'login_yes.ejs',
+            filename: 'itemDetails.ejs',
+            item: itemData,
+            userId: userId,
+            message: 'none'
+        })
+    }
+    else{
+        return res.render('alert', { error: '로그인 후 이용해 주세요.' });
+    }
+
+
+})
 app.get('/about', (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
     if (user) {
