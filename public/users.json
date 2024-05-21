@@ -32,7 +32,32 @@
         "expire_time": "07:58",
         "imgName": "6e6b1b97-8616-4b68-b3ca-dcaeca674e40.png",
         "isExpired": false,
-        "bidders": []
+        "bidders": [
+          {
+            "id": "admin3",
+            "price": "5"
+          },
+          {
+            "id": "admin3",
+            "price": "3"
+          },
+          {
+            "id": "admin3",
+            "price": "3"
+          },
+          {
+            "id": "admin3",
+            "price": "2"
+          },
+          {
+            "id": "admin3",
+            "price": "1"
+          },
+          {
+            "id": "admin3",
+            "price": "0"
+          }
+        ]
       },
       {
         "productName": "asdf",
@@ -44,8 +69,28 @@
         "isExpired": false,
         "bidders": [
           {
+            "id": "admin3",
+            "price": "9999999999"
+          },
+          {
+            "id": "admin3",
+            "price": "9999999"
+          },
+          {
             "id": "admin2",
             "price": "500000"
+          },
+          {
+            "id": "admin3",
+            "price": "4845"
+          },
+          {
+            "id": "admin3",
+            "price": "12354"
+          },
+          {
+            "id": "admin3",
+            "price": "12313"
           },
           {
             "id": "admin2",
@@ -53,7 +98,15 @@
           },
           {
             "id": "admin3",
+            "price": "11"
+          },
+          {
+            "id": "admin3",
             "price": "100000"
+          },
+          {
+            "id": "admin3",
+            "price": "0"
           }
         ]
       },
@@ -85,7 +138,16 @@
         "expire_time": "04:25",
         "imgName": "ede90808-dc89-4e66-81f2-88326f7b4b2f.png",
         "isExpired": false,
-        "bidders": []
+        "bidders": [
+          {
+            "id": "admin3",
+            "price": "1234"
+          },
+          {
+            "id": "admin3",
+            "price": "11111"
+          }
+        ]
       },
       {
         "productName": "ㄴㄴㅁㅁ",

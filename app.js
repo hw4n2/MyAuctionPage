@@ -299,6 +299,7 @@ app.post('/itemDetails', async (req, res) => {
             userExist: 'login_yes.ejs',
             filename: 'itemDetails.ejs',
             item: itemData,
+            itemList: 'none',
             userId: userId,
             message: 'none'
         })
@@ -312,7 +313,6 @@ app.post('/bid', async (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
     if (user) {
         const userId = JSON.parse(user).id;
-        const itemList = await extractItems(false);
 
         const price = req.body.priceInput;
         const itemData = JSON.parse(req.body.item);
@@ -320,6 +320,7 @@ app.post('/bid', async (req, res) => {
         bidder.id = userId;
         bidder.price = price;
         await appendBidder(bidder, itemData);
+        const itemList = await extractItems(false);
 
         return res.render("index", {
             userExist: 'login_yes.ejs',
