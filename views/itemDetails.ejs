@@ -1,6 +1,5 @@
 <section id="detailArea">
-    <img id="detailImage">
-    <div id="productInfo"></div>
+    
 </section>
 
 <script>
@@ -10,9 +9,12 @@
     
 
     const container = document.getElementById("detailArea");
+    const imgContainer = document.createElement('div');
+    imgContainer.className = '_imgContainer';
     const detailImg = document.createElement('img');
     detailImg.className = '_itemImg';
     detailImg.src = `uploads/${item.imgName}`;
+    imgContainer.appendChild(detailImg);
 
     const infoDiv = document.createElement('div');
     infoDiv.className = '_infoContainer';
@@ -68,6 +70,7 @@
     buyBtn.textContent = '응찰';
 
     const form = document.createElement('form');
+    form.className = 'formContainer';
     form.method = 'POST';
     form.action = '/bid';
     form.onsubmit = function submitConfirm() {
@@ -86,7 +89,8 @@
 
     infoDiv.append(infoHeader, newId, newName, newDetail, newPrice, bid, periodDate, priceInput, buyBtn);
     form.appendChild(infoDiv);
-    container.append(detailImg, form);
+    container.append(imgContainer, form);
+
 
     function formatDate(inputDate) {
         const parts = inputDate.split('-');

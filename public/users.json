@@ -182,6 +182,66 @@
     "id": "admin3",
     "name": "asfasd",
     "password": "$2b$10$iImPBNLR.4SuENalT8P2YePob0jVohI2P3ELhOJj3pTr9QZ.9FHg6",
-    "items": []
+    "items": [
+      {
+        "productName": "킥보드",
+        "productDetails": "324",
+        "productPrice": "23423",
+        "expire_date": "2024-05-05",
+        "expire_time": "21:18",
+        "imgName": "2f1464fe-fed1-4b5b-b7fe-bba25581d8df.jpg",
+        "isExpired": true,
+        "bidders": []
+      },
+      {
+        "productName": "adsf",
+        "productDetails": "adsf",
+        "productPrice": "1324",
+        "expire_date": "2024-06-08",
+        "expire_time": "15:14",
+        "imgName": "ec38b8af-c62d-400f-88cb-262a1bfc22ba.jpg",
+        "isExpired": false,
+        "bidders": []
+      },
+      {
+        "productName": "킥보드",
+        "productDetails": "adsf",
+        "productPrice": "324",
+        "expire_date": "2024-06-06",
+        "expire_time": "14:17",
+        "imgName": "c9a4f626-5a30-45f2-9988-b5b1e86b6c95.png",
+        "isExpired": false,
+        "bidders": []
+      },
+      {
+        "productName": "ㅁㄴㅇㄻㄴㄹ",
+        "productDetails": "dsaf",
+        "productPrice": "12312",
+        "expire_date": "2024-05-22",
+        "expire_time": "21:34",
+        "imgName": "35b739d1-10a1-476c-8555-a304b0c6b388.jpg",
+        "isExpired": false,
+        "bidders": [
+          {
+            "id": "admin2",
+            "price": "130000"
+          },
+          {
+            "id": "admin2",
+            "price": "120000"
+          }
+        ]
+      },
+      {
+        "productName": "킥보드",
+        "productDetails": "fd",
+        "productPrice": "2",
+        "expire_date": "2024-05-22",
+        "expire_time": "21:42",
+        "imgName": "e78bb06c-510c-4e0c-981d-080c4afed2b3.webp",
+        "isExpired": false,
+        "bidders": []
+      }
+    ]
   }
 ]

@@ -39,13 +39,15 @@
         const newDiv = document.createElement('div');
         newDiv.className = 'itemContainer';
 
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'imgContainer';
         const newImg = document.createElement('img'); //이미지
         newImg.className = 'itemImg';
         newImg.src = `/uploads/${item.imgName}`;
+        imgContainer.appendChild(newImg);
 
         const infoDiv = document.createElement('div');
         infoDiv.className = 'infoContainer';
-        infoDiv.style = "border-left: 1px solid grey";
 
         const infoHeader = document.createElement('div');
         infoHeader.className = '_infoHeader';
@@ -82,10 +84,15 @@
 
         const nullDiv = document.createElement('div');
         nullDiv.style = "height: 5%";
-        infoDiv.append(infoHeader, nullDiv, newName, newId, newPrice, periodDate);
-        newDiv.append(newImg, infoDiv);
 
+        const to_detail = document.createElement('div');
+        to_detail.className = 'to_detailBtn';
+        to_detail.textContent = '상세보기';
+
+        infoDiv.append(infoHeader, nullDiv, newName, newId, newPrice, periodDate, to_detail);
+        newDiv.append(imgContainer, infoDiv);
         container.appendChild(newDiv);
+
         newDiv.addEventListener("click", function () {
             const form = document.createElement('form');
             form.method = 'POST';

@@ -109,9 +109,9 @@ td {
 #curPageTitle{
   position: fixed;
   font-size: 40px;
-  left: 300px;
+  left: 200px;
   top: 120px;
-  width: 80%;
+  width: 88%;
   height: 80px;
   padding-top: 50px;
   background-color: white;
@@ -119,34 +119,59 @@ td {
 #itemArea{
   position: absolute;
   z-index: -1;
-  left: 250px;
+  left:200px;
   width: 90vw;
   padding-top: 140px;
   padding-bottom: 50px;
-  overflow-x: hidden;
-  overflow-y: auto;
+
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 50px;
 }
 
-
+.imgContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 3 1 0;
+  padding-right: 20px;
+}
 .itemImg{
+  height: auto;
   max-height: 100%;
   max-width: 100%;
+  object-fit: contain;
 }
 .itemContainer{
   display:flex;
   flex-direction: row;
-  height: 300px;
-  width: 100%;
+  flex-wrap: nowrap;
+  height: 500px auto;
+  width: 90%;
   padding-top: 30px;
   padding-bottom: 30px;
 }
 .infoContainer{
   display: flex;
   flex-direction: column;
+  flex: 1 1 0;
   gap: 30px;
+  padding-top: 10%;
   padding-left: 30px;
+  border-left: 1px solid grey; 
+  object-fit: contain;
+
+}
+
+.to_detailBtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(85, 85, 85);;
+  border: 1px solid rgb(210, 210, 210);
+  border-radius: 2px;
+  height: 10%;
+  padding-bottom: 3px;
 }
 
 .itemPeriod{
@@ -161,11 +186,25 @@ td {
   top: 150px;
   left: 100px;
   height: 80vh;
-
+  width: 80%;
 }
 
+._imgContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 4 1 0;
+  padding-right: 10px;
+}
 ._itemImg{
-
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.formContainer{
+  padding-top: 5%;
+  flex: 1 1 0;
+  
 }
 ._infoContainer{
   display: flex;
@@ -173,11 +212,15 @@ td {
   gap: 30px;
   padding-top: 50px;
   padding-left: 100px;
+  object-fit: contain;
+
 }
 ._infoHeader{
   display:flex;
   flex-direction: row;
   justify-content: space-between;
+  padding-bottom: 5%;
+  border-bottom: 1px solid grey;
 
 }
 ._itemName{
