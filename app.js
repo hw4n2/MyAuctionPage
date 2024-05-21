@@ -62,6 +62,16 @@ async function appendProductData(userId, productData) {
     await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
 }
 
+async function appendBidder(bidder, itemData){
+    const users = await fetchAllUsers();
+    const userItems = users.find(user => user.id === itemData.id).items;
+    const item = userItems.find(item => item.imgName === itemData.imgName);
+    item.bidders.push(bidder);
+    item.bidders.sort((a, b) => a.price >= b.price ? -1 : 1);
+
+    await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
+}
+
 async function checkExpiration() {
     var today = new Date();
     var dateString = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
@@ -306,6 +316,10 @@ app.post('/bid', async (req, res) => {
 
         const price = req.body.priceInput;
         const itemData = JSON.parse(req.body.item);
+        const bidder= {};
+        bidder.id = userId;
+        bidder.price = price;
+        await appendBidder(bidder, itemData);
 
         return res.render("index", {
             userExist: 'login_yes.ejs',

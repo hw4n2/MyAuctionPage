@@ -42,7 +42,20 @@
         "expire_time": "10:30",
         "imgName": "d31bf026-9bad-4e4e-bfe7-b11085f3aa10.png",
         "isExpired": false,
-        "bidders": []
+        "bidders": [
+          {
+            "id": "admin2",
+            "price": "500000"
+          },
+          {
+            "id": "admin2",
+            "price": "121"
+          },
+          {
+            "id": "admin3",
+            "price": "100000"
+          }
+        ]
       },
       {
         "productName": "asdffdd",

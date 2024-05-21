@@ -2,10 +2,11 @@
     <hr>
 </div>
 <article id="itemArea">
-    
+
 </article>
 
 <script>
+    const cookieId = '<%= userId %>';
     const itemList = '<%- JSON.stringify(itemList) %>';
     const parsedList = JSON.parse(itemList);
     parsedList.sort((a, b) => {
@@ -47,8 +48,21 @@
         infoDiv.style = "border-left: 1px solid grey";
 
         const infoHeader = document.createElement('div');
-        infoHeader.className = 'infoHeader';
-        infoHeader.textContent = to_Dday(item.expire_date);
+        infoHeader.className = '_infoHeader';
+        const dDay = document.createElement('div');
+        dDay.className = 'dDayTag';
+        dDay.textContent = to_Dday(item.expire_date);
+        const isMine = document.createElement('div');
+        isMine.className = 'isMineTag';
+        if (item.id == cookieId) isMine.textContent = '내 상품';
+        else isMine.textContent = `경매중`;
+        const bidNum = document.createElement('div');
+        bidNum.className = 'bidNum';
+        if(item.bidders.length != 0){
+            bidNum.textContent = `응찰 ${item.bidders.length}`;
+        }
+        else bidNum.textContent = '';
+        infoHeader.append(dDay, isMine, bidNum);
 
         const newName = document.createElement('div');//제목
         newName.className = 'itemName';
@@ -85,7 +99,7 @@
             document.body.appendChild(form);
             form.submit();
         })
-        
+
     }
 
     function formatDate(inputDate) {

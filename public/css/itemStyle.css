@@ -119,14 +119,14 @@ td {
 #itemArea{
   position: absolute;
   z-index: -1;
-  left: 300px;
+  left: 250px;
   width: 90vw;
   padding-top: 140px;
   padding-bottom: 50px;
-
+  overflow-x: hidden;
+  overflow-y: auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
 }
 
 
@@ -175,6 +175,9 @@ td {
   padding-left: 100px;
 }
 ._infoHeader{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
 
 }
 ._itemName{
