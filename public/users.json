@@ -82,7 +82,7 @@
           },
           {
             "id": "admin3",
-            "price": "4845"
+            "price": "100000"
           },
           {
             "id": "admin3",
@@ -91,6 +91,10 @@
           {
             "id": "admin3",
             "price": "12313"
+          },
+          {
+            "id": "admin3",
+            "price": "4845"
           },
           {
             "id": "admin2",
@@ -102,7 +106,7 @@
           },
           {
             "id": "admin3",
-            "price": "100000"
+            "price": "0"
           },
           {
             "id": "admin3",
@@ -118,7 +122,12 @@
         "expire_time": "04:25",
         "imgName": "627bb1a7-da85-45ee-8241-182bf5f005f7.png",
         "isExpired": false,
-        "bidders": []
+        "bidders": [
+          {
+            "id": "admin3",
+            "price": "0"
+          }
+        ]
       },
       {
         "productName": "gggg",
@@ -128,7 +137,12 @@
         "expire_time": "10:31",
         "imgName": "8654785e-1440-4721-8fff-ca88f39d6a1c.png",
         "isExpired": false,
-        "bidders": []
+        "bidders": [
+          {
+            "id": "admin3",
+            "price": "0"
+          }
+        ]
       },
       {
         "productName": "dfasf",
@@ -141,11 +155,11 @@
         "bidders": [
           {
             "id": "admin3",
-            "price": "1234"
+            "price": "11111"
           },
           {
             "id": "admin3",
-            "price": "11111"
+            "price": "1234"
           }
         ]
       },
@@ -157,6 +171,46 @@
         "expire_time": "13:21",
         "imgName": "65a41fd9-1a64-4c7a-a921-a9722348c75a.png",
         "isExpired": false,
+        "bidders": [
+          {
+            "id": "admin3",
+            "price": "1"
+          }
+        ]
+      },
+      {
+        "productName": "asdf",
+        "productDetails": "adsffd",
+        "productPrice": "34",
+        "expire_date": "2024-05-23",
+        "expire_time": "13:57",
+        "imgName": "0e9771d3-c9fc-45bd-ab84-27b84ebfa1aa.jpg",
+        "isExpired": true,
+        "bidders": []
+      },
+      {
+        "productName": "ㅇㄹ",
+        "productDetails": "ㅇㄹ",
+        "productPrice": "34",
+        "expire_date": "2024-05-23",
+        "expire_time": "14:08",
+        "imgName": "dc22af2f-e8b2-4e0b-aa9e-8d8e9aa4993e.jpg",
+        "isExpired": true,
+        "bidders": [
+          {
+            "id": "admin3",
+            "price": "1"
+          }
+        ]
+      },
+      {
+        "productName": "ewr",
+        "productDetails": "dafs",
+        "productPrice": "143",
+        "expire_date": "2024-05-23",
+        "expire_time": "14:09",
+        "imgName": "a0a69d06-54a7-4a29-82b5-eebfc3ee92b5.jpg",
+        "isExpired": true,
         "bidders": []
       }
     ]
@@ -250,16 +304,7 @@
         "expire_time": "12:17",
         "imgName": "50f2a885-aebf-4fd6-92da-8972bc4ec686.jpg",
         "isExpired": false,
-        "bidders": [
-          {
-            "id": "admin",
-            "price": "2"
-          },
-          {
-            "id": "admin",
-            "price": "1"
-          }
-        ]
+        "bidders": []
       },
       {
         "productName": "보림사",
@@ -269,7 +314,28 @@
         "expire_time": "18:12",
         "imgName": "04e1d19b-2ff6-4241-8f7e-3629cb63a031.webp",
         "isExpired": false,
-        "bidders": []
+        "bidders": [
+          {
+            "id": "admin",
+            "price": "444444"
+          },
+          {
+            "id": "admin",
+            "price": "12414"
+          },
+          {
+            "id": "admin",
+            "price": "111"
+          },
+          {
+            "id": "admin",
+            "price": "12"
+          },
+          {
+            "id": "admin",
+            "price": "1"
+          }
+        ]
       }
     ]
   }

@@ -67,7 +67,7 @@ async function appendBidder(bidder, itemData){
     const userItems = users.find(user => user.id === itemData.id).items;
     const item = userItems.find(item => item.imgName === itemData.imgName);
     item.bidders.push(bidder);
-    item.bidders.sort((a, b) => a.price >= b.price ? -1 : 1);
+    item.bidders.sort((a, b) => parseInt(a.price) >= parseInt(b.price) ? -1 : 1);
 
     await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
 }
@@ -82,6 +82,7 @@ async function checkExpiration() {
     let isModified = false;
     for (let i = 0; i < users.length; i++) {
         for (let j = 0; j < users[i].items.length; j++) {
+            users[i].items[j].bidders.sort((a, b) => parseInt(a.price) >= parseInt(b.price) ? -1 : 1);
             if (users[i].items[j].isExpired) {
                 continue;
             }
@@ -93,8 +94,7 @@ async function checkExpiration() {
             }
         }
     }
-    if (isModified)
-        await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
+    await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
 };
 
 async function extractItems(status) {
@@ -178,6 +178,8 @@ app.post('/signInSubmit', async (req, res) => {
     if (exist) {
         if (await bcrypt.compare(password, exist.password)) {
             res.cookie(USER_COOKIE_KEY, JSON.stringify(exist));
+            const user = JSON.parse(req.cookies[USER_COOKIE_KEY]);
+            console.log(user.id);
             console.log(id + " log in");
             return res.render("index", {
                 userExist: 'login_yes.ejs',
@@ -195,6 +197,9 @@ app.post('/signInSubmit', async (req, res) => {
 
 app.get('/logOutClicked', (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
+    if(!user){
+        res.render('alert', {error: '오류가 발생했습니다.'});
+    }
     const userData = JSON.parse(user);
     console.log(userData.id + " log out");
     res.clearCookie(USER_COOKIE_KEY);
@@ -310,6 +315,7 @@ app.post('/itemDetails', async (req, res) => {
 })
 
 app.post('/bid', async (req, res) => {
+
     const user = req.cookies[USER_COOKIE_KEY];
     if (user) {
         const userId = JSON.parse(user).id;
@@ -337,6 +343,7 @@ app.post('/bid', async (req, res) => {
 })
 
 app.get('/about', (req, res) => {
+
     const user = req.cookies[USER_COOKIE_KEY];
     if (user) {
         const userData = JSON.parse(user);
