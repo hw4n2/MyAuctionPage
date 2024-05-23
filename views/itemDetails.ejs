@@ -1,12 +1,12 @@
 <section id="detailArea">
-    
+
 </section>
 
 <script>
     const cookieId = '<%= userId %>';
     let item = '<%- item %>';
     item = JSON.parse(item);
-    
+
 
     const container = document.getElementById("detailArea");
     const imgContainer = document.createElement('div');
@@ -15,6 +15,9 @@
     detailImg.className = '_itemImg';
     detailImg.src = `uploads/${item.imgName}`;
     imgContainer.appendChild(detailImg);
+    imgContainer.addEventListener("click", function(){
+        window.open(`uploads/${item.imgName}`);
+    })
 
     const infoDiv = document.createElement('div');
     infoDiv.className = '_infoContainer';
@@ -28,7 +31,11 @@
     const isMine = document.createElement('div');
     isMine.className = 'isMineTag';
     if (item.id == cookieId) isMine.textContent = '내 상품';
-    else isMine.textContent = `경매중`;
+    else {
+        if(!item.isExpired){
+            isMine.textContent = `경매중`;
+        }
+    }
     infoHeader.append(dDay, isMine);
 
     const newName = document.createElement('div');//제목
@@ -49,10 +56,17 @@
 
     const bid = document.createElement('div');
     bid.className = '_bidNum';
-    if (item.bidders.length != 0) {
-        bid.textContent = `현재가 : ${item.bidders[0].price} 원 (응찰 ${item.bidders.length})`;
+    if (item.isExpired) {
+        bid.className = 'resultPrice';
+        bid.textContent = `낙찰 : ${item.id} (${item.bidders[0].price} 원)`;
     }
-    else bid.textContent = '';
+    else {
+        if (item.bidders.length != 0) {
+            bid.textContent = `현재가 : ${item.bidders[0].price} 원 (응찰 ${item.bidders.length}/10)`;
+        }
+        else bid.textContent = '';
+    }
+
 
     const periodDate = document.createElement('div');//마감기간
     periodDate.className = '_itemPeriod';
@@ -64,10 +78,16 @@
     priceInput.name = 'priceInput';
     priceInput.placeholder = "응찰가";
     priceInput.required = true;
+    if(item.isExpired){
+        priceInput.style = "display: none";
+    }
 
     const buyBtn = document.createElement('button');
     buyBtn.className = 'butBtn';
     buyBtn.textContent = '응찰';
+    if(item.isExpired){
+        buyBtn.style = "display: none";
+    }
 
     const form = document.createElement('form');
     form.className = 'formContainer';
@@ -78,7 +98,15 @@
             alert('본인의 상품에는 응찰할 수 없습니다.');
             return false;
         }
-        return confirm(`${priceInput.value} 원에 응찰하시겠습니까?`);
+        else if (item.bidders.length >= 10) {
+            alert('응찰 정원이 초과되었습니다.');
+            return false;
+        }
+        else if (item.bidders.length != 0 && item.bidders[0].price >= priceInput.value) {
+            alert('현재가보다 낮거나 같은 가격으로 응찰할 수 없습니다.');
+            return false;
+        }
+        return confirm(`${item.productName} 을(를) ${priceInput.value} 원에 응찰하시겠습니까?`);
     };
 
     const object = document.createElement('input');

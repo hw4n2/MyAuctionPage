@@ -9,6 +9,11 @@
     const cookieId = '<%= userId %>';
     const itemList = '<%- JSON.stringify(itemList) %>';
     const parsedList = JSON.parse(itemList);
+    if(parsedList.length == 0){
+        const container = document.getElementById('itemArea');
+        container.append(document.createElement('div').textContent = '아직 경매가 종료된 상품이 없습니다.');
+        container.style = "display:flex; justify-content: center; top: 20%";
+    }
     parsedList.sort((a, b) => {
         const dateA = new Date(a.expire_date + " " + a.expire_time);
         const dateB = new Date(b.expire_date + " " + b.expire_time);
@@ -57,7 +62,7 @@
         dDay.textContent = to_Dday(item.expire_date);
         const isMine = document.createElement('div');
         isMine.className = 'isMineTag';
-        if (item.id == cookieId) isMine.textContent = 'My';
+        if (item.id == cookieId) isMine.textContent = '내 상품';
         else isMine.textContent = ``;
         const bidNum = document.createElement('div');
         bidNum.className = 'bidNum';
@@ -93,6 +98,20 @@
         infoDiv.append(infoHeader, nullDiv, newName, newId, newPrice, periodDate, to_detail);
         newDiv.append(imgContainer, infoDiv);
         container.appendChild(newDiv);
+
+        newDiv.addEventListener("click", function () {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = "/itemDetails";
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'item';
+            input.value = JSON.stringify(item);
+            form.appendChild(input);
+
+            document.body.appendChild(form);
+            form.submit();
+        })
     }
     function formatDate(inputDate) {
         const parts = inputDate.split('-');

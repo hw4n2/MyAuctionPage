@@ -62,7 +62,7 @@ async function appendProductData(userId, productData) {
     await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
 }
 
-async function appendBidder(bidder, itemData){
+async function appendBidder(bidder, itemData) {
     const users = await fetchAllUsers();
     const userItems = users.find(user => user.id === itemData.id).items;
     const item = userItems.find(item => item.imgName === itemData.imgName);
@@ -82,7 +82,6 @@ async function checkExpiration() {
     let isModified = false;
     for (let i = 0; i < users.length; i++) {
         for (let j = 0; j < users[i].items.length; j++) {
-            users[i].items[j].bidders.sort((a, b) => parseInt(a.price) >= parseInt(b.price) ? -1 : 1);
             if (users[i].items[j].isExpired) {
                 continue;
             }
@@ -94,7 +93,9 @@ async function checkExpiration() {
             }
         }
     }
-    await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
+    if (isModified) {
+        await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
+    }
 };
 
 async function extractItems(status) {
@@ -121,7 +122,7 @@ app.get('/', (req, res) => {
         return res.render("index", {
             userExist: 'login_yes.ejs',
             filename: 'main.ejs',
-            userId: userData.id,
+            userId: userData,
             message: 'none'
         });
     }
@@ -158,7 +159,7 @@ app.post('/signUpSubmit', async (req, res) => {
     }
 
     const newUser = { id, name }; //유저정보(쿠키)
-    res.cookie(USER_COOKIE_KEY, JSON.stringify(newUser));
+    res.cookie(USER_COOKIE_KEY, JSON.stringify(newUser.id));
     newUser.password = password;
     newUser.items = [];
     console.log(newUser);
@@ -173,13 +174,12 @@ app.post('/signUpSubmit', async (req, res) => {
 });
 
 app.post('/signInSubmit', async (req, res) => {
+    checkExpiration();
     const { id, password } = req.body;
     const exist = await fetchUser(id);
     if (exist) {
         if (await bcrypt.compare(password, exist.password)) {
-            res.cookie(USER_COOKIE_KEY, JSON.stringify(exist));
-            const user = JSON.parse(req.cookies[USER_COOKIE_KEY]);
-            console.log(user.id);
+            res.cookie(USER_COOKIE_KEY, JSON.stringify(exist.id));
             console.log(id + " log in");
             return res.render("index", {
                 userExist: 'login_yes.ejs',
@@ -197,11 +197,11 @@ app.post('/signInSubmit', async (req, res) => {
 
 app.get('/logOutClicked', (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
-    if(!user){
-        res.render('alert', {error: '오류가 발생했습니다.'});
+    if (!user) {
+        res.render('alert', { error: '오류가 발생했습니다.' });
     }
     const userData = JSON.parse(user);
-    console.log(userData.id + " log out");
+    console.log(userData + " log out");
     res.clearCookie(USER_COOKIE_KEY);
     res.render("index", {
         userExist: 'login_no.ejs',
@@ -212,6 +212,7 @@ app.get('/logOutClicked', (req, res) => {
 })
 
 app.get('/curAuctions', async (req, res) => {
+    checkExpiration();
     const user = req.cookies[USER_COOKIE_KEY];
     const itemList = await extractItems(false);
     if (user) {
@@ -221,7 +222,7 @@ app.get('/curAuctions', async (req, res) => {
             filename: 'curAuctions.ejs',
             itemPage: 'onsale.ejs',
             itemList: itemList,
-            userId: userData.id,
+            userId: userData,
             message: 'none'
         });
 
@@ -236,6 +237,7 @@ app.get('/curAuctions', async (req, res) => {
     });
 });
 app.get('/expiredPage', async (req, res) => {
+    checkExpiration();
     const user = req.cookies[USER_COOKIE_KEY];
     const itemList = await extractItems(true);
     if (user) {
@@ -245,7 +247,7 @@ app.get('/expiredPage', async (req, res) => {
             filename: 'curAuctions.ejs',
             itemPage: 'expired.ejs',
             itemList: itemList,
-            userId: userData.id,
+            userId: userData,
             message: 'none'
         });
 
@@ -268,7 +270,7 @@ app.get('/sells', (req, res) => {
         return res.render("index", {
             userExist: 'login_yes.ejs',
             filename: 'sells.ejs',
-            userId: userData.id,
+            userId: userData,
             message: 'none'
         });
 
@@ -277,7 +279,7 @@ app.get('/sells', (req, res) => {
 });
 app.post('/upload', uploadMiddleware, async (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
-    const userId = JSON.parse(user).id;
+    const userId = JSON.parse(user);
     if (!user) {
         return res.render('alert', { error: '오류가 발생했습니다. 다시 시도해 해주세요.' });
     }
@@ -298,7 +300,7 @@ app.post('/upload', uploadMiddleware, async (req, res) => {
 app.post('/itemDetails', async (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
     if (user) {
-        const userId = JSON.parse(user).id;
+        const userId = JSON.parse(user);
         const itemData = req.body.item;
         return res.render("index", {
             userExist: 'login_yes.ejs',
@@ -309,7 +311,7 @@ app.post('/itemDetails', async (req, res) => {
             message: 'none'
         })
     }
-    else{
+    else {
         return res.render('alert', { error: '로그인 후 이용해 주세요.' });
     }
 })
@@ -318,11 +320,11 @@ app.post('/bid', async (req, res) => {
 
     const user = req.cookies[USER_COOKIE_KEY];
     if (user) {
-        const userId = JSON.parse(user).id;
+        const userId = JSON.parse(user);
 
         const price = req.body.priceInput;
         const itemData = JSON.parse(req.body.item);
-        const bidder= {};
+        const bidder = {};
         bidder.id = userId;
         bidder.price = price;
         await appendBidder(bidder, itemData);
@@ -337,7 +339,7 @@ app.post('/bid', async (req, res) => {
             message: '응찰이 완료되었습니다.'
         })
     }
-    else{
+    else {
         return res.render('alert', { error: '로그인 후 이용해 주세요.' });
     }
 })
@@ -350,7 +352,7 @@ app.get('/about', (req, res) => {
         return res.render("index", {
             userExist: 'login_yes.ejs',
             filename: 'about.ejs',
-            userId: userData.id,
+            userId: userData,
             message: 'none'
         });
 
