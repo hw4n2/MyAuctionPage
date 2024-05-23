@@ -56,7 +56,7 @@
         dDay.textContent = to_Dday(item.expire_date);
         const isMine = document.createElement('div');
         isMine.className = 'isMineTag';
-        if (item.id == cookieId) isMine.textContent = '내 상품';
+        if (item.id == cookieId) isMine.textContent = 'My';
         else isMine.textContent = `경매중`;
         const bidNum = document.createElement('div');
         bidNum.className = 'bidNum';
@@ -111,10 +111,9 @@
 
     function formatDate(inputDate) {
         const parts = inputDate.split('-');
-        const year = parts[0];
         const month = parts[1];
         const day = parts[2];
-        return `${year}년 ${month}월 ${day}일`;
+        return `${month}월 ${day}일`;
     }
     function formatTime(inputTime) {
         const parts = inputTime.split(':');

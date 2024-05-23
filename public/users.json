@@ -220,7 +220,7 @@
         "expire_date": "2024-05-22",
         "expire_time": "21:34",
         "imgName": "35b739d1-10a1-476c-8555-a304b0c6b388.jpg",
-        "isExpired": false,
+        "isExpired": true,
         "bidders": [
           {
             "id": "admin2",
@@ -239,6 +239,35 @@
         "expire_date": "2024-05-22",
         "expire_time": "21:42",
         "imgName": "e78bb06c-510c-4e0c-981d-080c4afed2b3.webp",
+        "isExpired": true,
+        "bidders": []
+      },
+      {
+        "productName": "염거화상탑",
+        "productDetails": "ㅇㅁㄴㄹ",
+        "productPrice": "3243",
+        "expire_date": "2024-05-24",
+        "expire_time": "12:17",
+        "imgName": "50f2a885-aebf-4fd6-92da-8972bc4ec686.jpg",
+        "isExpired": false,
+        "bidders": [
+          {
+            "id": "admin",
+            "price": "2"
+          },
+          {
+            "id": "admin",
+            "price": "1"
+          }
+        ]
+      },
+      {
+        "productName": "보림사",
+        "productDetails": "ㅁㅇㄹㄴ",
+        "productPrice": "234",
+        "expire_date": "2024-05-25",
+        "expire_time": "18:12",
+        "imgName": "04e1d19b-2ff6-4241-8f7e-3629cb63a031.webp",
         "isExpired": false,
         "bidders": []
       }
