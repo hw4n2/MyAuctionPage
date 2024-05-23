@@ -90,6 +90,24 @@ async function checkExpiration() {
                 users[i].items[j].isExpired = true;
                 console.log(users[i].items[j].productName + " of " + users[i].id + " is expired");
                 isModified = true;
+
+                let alreadySent = [];
+            for (let k = 0; k < users[i].items[j].bidders.length; k++) {
+                const user = users.find((user) => user.id === users[i].items[j].bidders[k].id);
+                let notice;
+                if (k == 0) {
+                    notice = `[${users[i].items[j].productName}] 낙찰되었습니다.
+낙찰가 : ${users[i].items[j].bidders[k].price}`;
+                    alreadySent.push(users[i].items[j].bidders[k].id);
+                }
+                else {
+                    if (alreadySent.find((id) => id == users[i].items[j].bidders[k].id)) continue;
+                    notice = `[${users[i].items[j].productName}] 낙찰되지 않았습니다.
+낙찰자 : ${users[i].items[j].bidders[0].id} | 낙찰가 : ${users[i].items[j].bidders[0].price}`;
+                    alreadySent.push(users[i].items[j].bidders[k].id);
+                }
+                user.notices.push(notice);
+            }
             }
         }
     }
@@ -97,6 +115,8 @@ async function checkExpiration() {
         await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
     }
 };
+
+
 
 async function extractItems(status) {
     const itemList = [];
@@ -161,6 +181,7 @@ app.post('/signUpSubmit', async (req, res) => {
     const newUser = { id, name }; //유저정보(쿠키)
     res.cookie(USER_COOKIE_KEY, JSON.stringify(newUser.id));
     newUser.password = password;
+    newUser.notices = [];
     newUser.items = [];
     console.log(newUser);
     await createUser(newUser);

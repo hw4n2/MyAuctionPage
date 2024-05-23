@@ -1,3 +1,3 @@
 {
-    "ignore": [".nodemon.json"]
+    "ignore": ["./public/users.json"]
 }

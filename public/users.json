@@ -3,15 +3,16 @@
     "id": "admin",
     "name": "김정환",
     "password": "$2b$10$n3tmc5nUb3Z9lj.JVH5puuw1aS6xlas4.g2dqdtWLVF2m0S70kmgS",
+    "notices": [],
     "items": [
       {
         "productName": "킥보드",
         "productDetails": "ㅇㅇ",
         "productPrice": "1511",
-        "expire_date": "2024-06-08",
+        "expire_date": "2024-05-08",
         "expire_time": "16:56",
         "imgName": "b9750611-7aca-41b6-a6eb-024132e8039b.png",
-        "isExpired": false,
+        "isExpired": true,
         "bidders": [
           {
             "id": "admin2",
@@ -31,11 +32,15 @@
         "productName": "킥보드",
         "productDetails": "dd",
         "productPrice": "131",
-        "expire_date": "2024-06-08",
+        "expire_date": "2024-05-08",
         "expire_time": "16:01",
         "imgName": "35d3a0ee-e732-4543-b57c-45c89cf369e5.png",
-        "isExpired": false,
+        "isExpired": true,
         "bidders": [
+          {
+            "id": "admin3",
+            "price": "16"
+          },
           {
             "id": "admin2",
             "price": "15"
@@ -52,6 +57,9 @@
     "id": "admin2",
     "name": "dd",
     "password": "$2b$10$R1PKxerPG3NMLGF/5Mr8xe.dJN55uqCz93idBcuVC1Pdksts2Yi/K",
+    "notices": [
+      "[킥보드] 낙찰되지 않았습니다.\n낙찰자 : admin3 | 낙찰가 : 16"
+    ],
     "items": [
       {
         "productName": "염거화상탑",
@@ -62,6 +70,10 @@
         "imgName": "8863e5db-67a1-4b21-9177-a86c288b687b.jpg",
         "isExpired": false,
         "bidders": [
+          {
+            "id": "admin2",
+            "price": "3"
+          },
           {
             "id": "admin",
             "price": "2"
@@ -77,5 +89,14 @@
         ]
       }
     ]
+  },
+  {
+    "id": "admin3",
+    "name": "da",
+    "password": "$2b$10$qeru3ySMcjY5JrXveHRYbeILum/h.NoqSFN/85iBQehWrIc1DXl5u",
+    "notices": [
+      "[킥보드] 낙찰되었습니다.\n낙찰가 : 16"
+    ],
+    "items": []
   }
 ]

@@ -58,7 +58,7 @@
     bid.className = '_bidNum';
     if (item.isExpired) {
         bid.className = 'resultPrice';
-        bid.textContent = `낙찰 : ${item.id} (${item.bidders[0].price} 원)`;
+        bid.textContent = `낙찰 : ${item.bidders[0].id} (${item.bidders[0].price} 원)`;
     }
     else {
         if (item.bidders.length != 0) {
