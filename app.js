@@ -96,14 +96,12 @@ async function checkExpiration() {
                 const user = users.find((user) => user.id === users[i].items[j].bidders[k].id);
                 let notice;
                 if (k == 0) {
-                    notice = `[${users[i].items[j].productName}] 낙찰되었습니다.
-낙찰가 : ${users[i].items[j].bidders[k].price}`;
+                    notice = `[${users[i].items[j].productName} / ${users[i].id}] 낙찰되었습니다. 낙찰가 : ${users[i].items[j].bidders[k].price}`;
                     alreadySent.push(users[i].items[j].bidders[k].id);
                 }
                 else {
                     if (alreadySent.find((id) => id == users[i].items[j].bidders[k].id)) continue;
-                    notice = `[${users[i].items[j].productName}] 낙찰되지 않았습니다.
-낙찰자 : ${users[i].items[j].bidders[0].id} | 낙찰가 : ${users[i].items[j].bidders[0].price}`;
+                    notice = `[${users[i].items[j].productName} / ${users[i].id}] 낙찰되지 않았습니다. 낙찰자 : ${users[i].items[j].bidders[0].id} | 낙찰가 : ${users[i].items[j].bidders[0].price}`;
                     alreadySent.push(users[i].items[j].bidders[k].id);
                 }
                 user.notices.push(notice);
@@ -171,6 +169,21 @@ app.get('/signUp', (req, res) => {
         message: 'none'
     });
 });
+app.get('/mypage', async (req, res) => {
+    const user = req.cookies[USER_COOKIE_KEY];
+    if(!user){
+        return res.render('alert', {error: '오류가 발생했습니다. 다시 시도해 해주세요.'});
+    }
+    const userData = await fetchUser(JSON.parse(user));
+    
+    res.render("index", {
+        userExist: 'login_yes.ejs',
+        filename: 'mypage.ejs',
+        userId: userData.id,
+        userData: userData,
+        message: 'none'
+    })
+})
 app.post('/signUpSubmit', async (req, res) => {
     const { id, password, name } = req.body;
     const exist = await fetchUser(id);

@@ -2,7 +2,7 @@
     <header id="headerArea">
         <img id="logoImg" src="/image/logo.jpg">
         <div class="header-rightContainer">
-            <div class="headerElement">
+            <div class="headerElement" id="to_mypage">
                 <%= userId %>
             </div>
             <div class="headerElement" id="to_logOut">로그아웃</div>
@@ -17,6 +17,10 @@
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        let mypageBtn = document.getElementById("to_mypage");
+        mypageBtn.addEventListener('click', function(){
+            window.location.href = '/myPage';
+        });
         let logOutBtn = document.getElementById("to_logOut");
         logOutBtn.addEventListener("click", function () {
             window.location.href = '/logOutClicked';

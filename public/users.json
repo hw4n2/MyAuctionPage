@@ -58,7 +58,8 @@
     "name": "dd",
     "password": "$2b$10$R1PKxerPG3NMLGF/5Mr8xe.dJN55uqCz93idBcuVC1Pdksts2Yi/K",
     "notices": [
-      "[킥보드] 낙찰되지 않았습니다.\n낙찰자 : admin3 | 낙찰가 : 16"
+      "[킥보드 / admin] 낙찰되었습니다. 낙찰가 : 11",
+      "[킥보드 / admin] 낙찰되지 않았습니다. 낙찰자 : admin3 | 낙찰가 : 16"
     ],
     "items": [
       {
@@ -95,7 +96,7 @@
     "name": "da",
     "password": "$2b$10$qeru3ySMcjY5JrXveHRYbeILum/h.NoqSFN/85iBQehWrIc1DXl5u",
     "notices": [
-      "[킥보드] 낙찰되었습니다.\n낙찰가 : 16"
+      "[킥보드 / admin] 낙찰되었습니다. 낙찰가 : 16"
     ],
     "items": []
   }
