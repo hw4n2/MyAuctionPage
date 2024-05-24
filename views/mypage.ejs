@@ -1,13 +1,21 @@
 <div id="curPageTitle">
-    회원정보<hr>
+    마이페이지<hr>
 </div>
 
 <section id="mypageArea">
-    
+    <div id="myItemContainer"></div>
+    <div id="noticeContainer"></div>
 </section>
 
 <script>
     const userData = '<%- JSON.stringify(userData) %>';
     const parsedUser = JSON.parse(userData);
-    const area = document.getElementById('mypageArea');    
+
+    const itemContainer = document.getElementById("myItemContainer");
+    const noticeContainer = document.getElementById("noticeContainer");
+
+    for(item of userData.items){
+        
+    }
+
 </script>

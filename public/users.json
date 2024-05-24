@@ -6,27 +6,14 @@
     "notices": [],
     "items": [
       {
-        "productName": "킥보드",
-        "productDetails": "ㅇㅇ",
-        "productPrice": "1511",
-        "expire_date": "2024-05-08",
-        "expire_time": "16:56",
-        "imgName": "b9750611-7aca-41b6-a6eb-024132e8039b.png",
-        "isExpired": true,
-        "bidders": [
-          {
-            "id": "admin2",
-            "price": "11"
-          },
-          {
-            "id": "admin2",
-            "price": "11"
-          },
-          {
-            "id": "admin2",
-            "price": "11"
-          }
-        ]
+        "productName": "dfsfd",
+        "productDetails": "dsf",
+        "productPrice": "123",
+        "expire_date": "2024-06-08",
+        "expire_time": "06:03",
+        "imgName": "5ff573cd-3853-4dec-a9a9-91c7a2ce99bd.webp",
+        "isExpired": false,
+        "bidders": []
       },
       {
         "productName": "킥보드",
@@ -50,6 +37,39 @@
             "price": "14"
           }
         ]
+      },
+      {
+        "productName": "dsafgfa",
+        "productDetails": "agsasf",
+        "productPrice": "4321",
+        "expire_date": "2024-05-03",
+        "expire_time": "05:04",
+        "imgName": "fd2d36e0-95b8-416a-abcf-123e840a116e.webp",
+        "isExpired": true,
+        "bidders": []
+      },
+      {
+        "productName": "킥보드",
+        "productDetails": "ㅇㅇ",
+        "productPrice": "1511",
+        "expire_date": "2024-05-02",
+        "expire_time": "16:56",
+        "imgName": "b9750611-7aca-41b6-a6eb-024132e8039b.png",
+        "isExpired": true,
+        "bidders": [
+          {
+            "id": "admin2",
+            "price": "11"
+          },
+          {
+            "id": "admin2",
+            "price": "11"
+          },
+          {
+            "id": "admin2",
+            "price": "11"
+          }
+        ]
       }
     ]
   },
@@ -59,6 +79,7 @@
     "password": "$2b$10$R1PKxerPG3NMLGF/5Mr8xe.dJN55uqCz93idBcuVC1Pdksts2Yi/K",
     "notices": [
       "[킥보드 / admin] 낙찰되었습니다. 낙찰가 : 11",
+      "[킥보드 / admin] 낙찰되지 않았습니다. 낙찰자 : admin3 | 낙찰가 : 16",
       "[킥보드 / admin] 낙찰되지 않았습니다. 낙찰자 : admin3 | 낙찰가 : 16"
     ],
     "items": [
@@ -96,6 +117,7 @@
     "name": "da",
     "password": "$2b$10$qeru3ySMcjY5JrXveHRYbeILum/h.NoqSFN/85iBQehWrIc1DXl5u",
     "notices": [
+      "[킥보드 / admin] 낙찰되었습니다. 낙찰가 : 16",
       "[킥보드 / admin] 낙찰되었습니다. 낙찰가 : 16"
     ],
     "items": []

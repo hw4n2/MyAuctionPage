@@ -58,6 +58,16 @@ async function appendProductData(userId, productData) {
     const user = users.find((user) => user.id === userId);
     productData.bidders = [];
     user.items.push(productData);
+    user.items.sort((a, b) => {
+        const dateA = new Date(a.expire_date + " " + a.expire_time);
+        const dateB = new Date(b.expire_date + " " + b.expire_time);
+        const now = new Date();
+
+        const diffA = Math.abs(dateA - now);
+        const diffB = Math.abs(dateB - now);
+
+        return diffA - diffB;
+    })
 
     await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
 }
@@ -92,20 +102,20 @@ async function checkExpiration() {
                 isModified = true;
 
                 let alreadySent = [];
-            for (let k = 0; k < users[i].items[j].bidders.length; k++) {
-                const user = users.find((user) => user.id === users[i].items[j].bidders[k].id);
-                let notice;
-                if (k == 0) {
-                    notice = `[${users[i].items[j].productName} / ${users[i].id}] 낙찰되었습니다. 낙찰가 : ${users[i].items[j].bidders[k].price}`;
-                    alreadySent.push(users[i].items[j].bidders[k].id);
+                for (let k = 0; k < users[i].items[j].bidders.length; k++) {
+                    const user = users.find((user) => user.id === users[i].items[j].bidders[k].id);
+                    let notice;
+                    if (k == 0) {
+                        notice = `[${users[i].items[j].productName} / ${users[i].id}] 낙찰되었습니다. 낙찰가 : ${users[i].items[j].bidders[k].price}`;
+                        alreadySent.push(users[i].items[j].bidders[k].id);
+                    }
+                    else {
+                        if (alreadySent.find((id) => id == users[i].items[j].bidders[k].id)) continue;
+                        notice = `[${users[i].items[j].productName} / ${users[i].id}] 낙찰되지 않았습니다. 낙찰자 : ${users[i].items[j].bidders[0].id} | 낙찰가 : ${users[i].items[j].bidders[0].price}`;
+                        alreadySent.push(users[i].items[j].bidders[k].id);
+                    }
+                    user.notices.push(notice);
                 }
-                else {
-                    if (alreadySent.find((id) => id == users[i].items[j].bidders[k].id)) continue;
-                    notice = `[${users[i].items[j].productName} / ${users[i].id}] 낙찰되지 않았습니다. 낙찰자 : ${users[i].items[j].bidders[0].id} | 낙찰가 : ${users[i].items[j].bidders[0].price}`;
-                    alreadySent.push(users[i].items[j].bidders[k].id);
-                }
-                user.notices.push(notice);
-            }
             }
         }
     }
@@ -113,9 +123,6 @@ async function checkExpiration() {
         await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
     }
 };
-
-
-
 async function extractItems(status) {
     const itemList = [];
     const users = await fetchAllUsers();
@@ -171,11 +178,11 @@ app.get('/signUp', (req, res) => {
 });
 app.get('/mypage', async (req, res) => {
     const user = req.cookies[USER_COOKIE_KEY];
-    if(!user){
-        return res.render('alert', {error: '오류가 발생했습니다. 다시 시도해 해주세요.'});
+    if (!user) {
+        return res.render('alert', { error: '오류가 발생했습니다. 다시 시도해 해주세요.' });
     }
     const userData = await fetchUser(JSON.parse(user));
-    
+
     res.render("index", {
         userExist: 'login_yes.ejs',
         filename: 'mypage.ejs',

@@ -85,7 +85,7 @@
 
         const periodDate = document.createElement('div');//마감기간
         periodDate.className = 'itemPeriod';
-        periodDate.innerHTML = '마감 : ' + formatDate(item.expire_date) + '<br>&nbsp;&nbsp;&emsp;&emsp;' + formatTime(item.expire_time);
+        periodDate.innerHTML = '마감 : ' + formatDate(item.expire_date) + ' ' + formatTime(item.expire_time);
 
         const nullDiv = document.createElement('div');
         nullDiv.style = "height: 5%";
@@ -115,15 +115,18 @@
     }
 
     function formatDate(inputDate) {
+        const weekDay = ['일', '월', '화', '수', '목', '금', '토'];
+        const date = weekDay[new Date(inputDate).getDay()];
         const parts = inputDate.split('-');
         const month = parts[1];
         const day = parts[2];
-        return `${month}월 ${day}일`;
+        return `${month}/${day}(${date})`;
     }
+    
     function formatTime(inputTime) {
         const parts = inputTime.split(':');
         const hour = parts[0];
         const minute = parts[1];
-        return `${hour}시 ${minute}분`;
+        return `${hour}:${minute}`;
     }
 </script>
