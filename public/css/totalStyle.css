@@ -60,7 +60,7 @@ img {
     position: fixed;
     width: 100%;
     padding-top: 0px;
-    z-index: 1;
+    z-index: 2;
 }
 /*header*/
 #headerArea {
@@ -70,6 +70,7 @@ img {
     justify-content: space-between;
     height: 80px;
     background-color: white;
+    z-index: 2;
 }
 
 .header-rightContainer {
@@ -96,6 +97,7 @@ img {
     padding-bottom: 10px;
     border-bottom: 1px solid #bcbcbc;
     background-color: white;
+    z-index: 2;
 }
 
 .navBtn {

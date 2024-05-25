@@ -98,7 +98,7 @@ async function checkExpiration() {
             let itemTime = new Date(users[i].items[j].expire_date + " " + users[i].items[j].expire_time + ":00");
             if (timeValue.getTime() >= itemTime.getTime()) {
                 users[i].items[j].isExpired = true;
-                console.log(users[i].items[j].productName + " of " + users[i].id + " is expired");
+                console.log("[Auction expired] "  + users[i].id + ", " +  users[i].items[j].productName);
                 isModified = true;
 
                 let alreadySent = [];
@@ -221,7 +221,7 @@ app.post('/signInSubmit', async (req, res) => {
     if (exist) {
         if (await bcrypt.compare(password, exist.password)) {
             res.cookie(USER_COOKIE_KEY, JSON.stringify(exist.id));
-            console.log(id + " log in");
+            console.log("[log in] " + id);
             return res.render("index", {
                 userExist: 'login_yes.ejs',
                 filename: 'main.ejs',
@@ -242,7 +242,7 @@ app.get('/logOutClicked', (req, res) => {
         res.render('alert', { error: '오류가 발생했습니다.' });
     }
     const userData = JSON.parse(user);
-    console.log(userData + " log out");
+    console.log("[log out] " + userData);
     res.clearCookie(USER_COOKIE_KEY);
     res.render("index", {
         userExist: 'login_no.ejs',
@@ -330,7 +330,7 @@ app.post('/upload', uploadMiddleware, async (req, res) => {
     userProduct.isExpired = false;
 
     await appendProductData(userId, userProduct);
-    console.log(userId + " is selling " + userProduct.productName);
+    console.log("[sell] " + userId + ", " + userProduct.productName);
     return res.render("index", {
         userExist: 'login_yes.ejs',
         filename: 'main.ejs',

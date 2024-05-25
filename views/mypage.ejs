@@ -1,8 +1,10 @@
 <div id="curPageTitle">
-    마이페이지<hr>
+    마이페이지
+    <hr>
 </div>
 
 <section id="mypageArea">
+    <div id="userInfoContainer"></div>
     <div id="myItemContainer"></div>
     <div id="noticeContainer"></div>
 </section>
@@ -10,12 +12,61 @@
 <script>
     const userData = '<%- JSON.stringify(userData) %>';
     const parsedUser = JSON.parse(userData);
-
+    const userContainer = document.getElementById("userInfoContainer");
     const itemContainer = document.getElementById("myItemContainer");
     const noticeContainer = document.getElementById("noticeContainer");
 
-    for(item of userData.items){
-        
+    const header = document.createElement('div');
+    const id = document.createElement('div');
+    header.textContent = '회원정보';
+    header.style = "font-size: 25px;"
+    id.textContent = parsedUser.id;
+    userContainer.append(header, id);
+
+    if (parsedUser.items.length == 0) {
+        const item = document.createElement('div');
+        item.textContent = '등록한 상품이 없습니다.'
+        itemContainer.appendChild(item);
+    }
+    else {
+        for (let i = 0; i < parsedUser.items.length; i++) {
+            const itemIter = parsedUser.items[i];
+            const item = document.createElement('div');
+            let status;
+            if (itemIter.isExpired) status = '[경매종료]';
+            else status = '[경매중]';
+            item.innerHTML = `${status} ${to_Dday(itemIter.expire_date)}
+${itemIter.productName} | 응찰 ${itemIter.bidders.length}<hr>`;
+            itemContainer.appendChild(item);
+        }
     }
 
+    if (parsedUser.notices.length == 0) {
+        const noticeBox = document.createElement('div');
+        noticeBox.innerHTML = '응찰 결과가 없습니다.<hr>';
+        noticeContainer.appendChild(noticeBox);
+    }
+    else {
+        for (let i = parsedUser.notices.length - 1; i >= 0; i--) {
+            const notice = parsedUser.notices[i];
+            const noticeBox = document.createElement('div');
+            noticeBox.innerHTML = notice + '<hr>';
+            noticeContainer.appendChild(noticeBox);
+        }
+    }
+
+    function to_Dday(date) {
+        const today = new Date();
+        const targetDate = new Date(date);
+        const differenceInTime = targetDate - today;
+        const differenceInDays = Math.ceil(differenceInTime / (1000 * 60 * 60 * 24));
+
+        if (differenceInDays > 0) {
+            return `D-${differenceInDays}`;
+        } else if (differenceInDays === 0) {
+            return 'D-day';
+        } else {
+            return '';
+        }
+    }
 </script>
