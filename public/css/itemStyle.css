@@ -248,8 +248,8 @@ td {
   position: fixed;
   display: flex;
   flex-direction: row;
-  gap: 5%;
-  row-gap: 5%;
+  gap: 3%;
+  row-gap: 4%;
   top: 30vh;
   left: 12vw;
   height: 65vh;
