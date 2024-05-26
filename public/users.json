@@ -13,7 +13,12 @@
         "expire_time": "06:03",
         "imgName": "5ff573cd-3853-4dec-a9a9-91c7a2ce99bd.webp",
         "isExpired": false,
-        "bidders": []
+        "bidders": [
+          {
+            "id": "admin3",
+            "price": "11"
+          }
+        ]
       },
       {
         "productName": "킥보드",
@@ -118,6 +123,17 @@
     "notices": [
       "[낙찰] 킥보드, admin | 낙찰가 : 16 원<br>종료일시: 2024-05-08 16:01"
     ],
-    "items": []
+    "items": [
+      {
+        "productName": "ㅁㄴㅇㄻㄴㄹ",
+        "productDetails": "ff",
+        "productPrice": "4",
+        "expire_date": "2024-05-27",
+        "expire_time": "17:15",
+        "imgName": "429b49e5-7f78-4e08-ae9a-776cef1f3fd7.jpg",
+        "isExpired": false,
+        "bidders": []
+      }
+    ]
   }
 ]

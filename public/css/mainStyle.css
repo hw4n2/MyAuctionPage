@@ -1,0 +1,27 @@
+/*메인페이지*/
+#bannerImg{
+    position: relative;
+    top: 11vh;
+    left: -110px;
+}
+/*about페이지*/
+#aboutPage{
+    position: absolute;
+    top: 30vh;
+
+}
+
+#aboutText{
+    position: relative;
+    left: 11vw;
+    font-size: 25px;
+}
+
+#howtoText{
+    position: relative;
+    left: 11vw;
+    font-size: 20px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 15px;
+}
