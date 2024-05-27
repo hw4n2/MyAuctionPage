@@ -5,13 +5,11 @@
             <img class="banner-in" src="image/banner_second.jpg">
             <img class="banner-in" src="image/Myauction_banner.png">
             <img class="banner-in" src="image/banner_second.jpg">
-            <img class="banner-in" src="image/Myauction_banner.png">
-            <img class="banner-in" src="image/banner_second.jpg">
         </div>
     </div>
     <div id="btnArea">
         <button class="leftBtn"><img src="image/left_button_img.svg"></button>
-        <input class="bannerSlider" type="range" min="0" disabled>
+        <input class="bannerSlider" type="range" disabled>
         <button class="rightBtn"><img src="image/right_button_img.svg"></button>
     </div>
 
@@ -28,9 +26,8 @@
     const slider = document.getElementsByClassName('bannerSlider');
 
     const sliderStep = parseInt(100 / inners.length);
-    slider[0].max = sliderStep * inners.length;
-    slider[0].value = sliderStep;
-    slider[0].step = sliderStep;
+    slider[0].max = sliderStep * (inners.length - 1);
+    slider[0].value = 0;
 
     for (inner of inners) {
         inner.style.width = `${outer.clientWidth}px`;
@@ -41,7 +38,7 @@
         if (curIndex != 0) {
             curIndex--;
             list.style.marginLeft = `-${outer.clientWidth * curIndex}px`;
-            slider[0].value = sliderStep * (curIndex + 1);
+            moveThumb('left', slider[0].value);
         }
     })
 
@@ -49,9 +46,29 @@
         if (curIndex != inners.length - 1) {
             curIndex++;
             list.style.marginLeft = `-${outer.clientWidth * curIndex}px`;
-            slider[0].value = sliderStep * (curIndex + 1);
+            moveThumb('right', slider[0].value);
         }
     })
 
+    const timer = ms => new Promise(res => setTimeout(res, ms));
+    async function moveThumb(direction, val) {
+        if (direction == 'left') {
+            let tmp = val;
+            for (let i = tmp; i >= tmp - sliderStep; i--) {
+                slider[0].value = i;
+                await timer(10);
+            }
+        }
+        else if (direction == 'right') {
+            const tmp = val;
+            for (let i = val; i <= val + sliderStep; i++) {
+                console.log(i);
+                if (i >= tmp + sliderStep) return;
+                slider[0].value = i;
+                await timer(10);
+                tmp = i;
+            }
+        }
+    }
 
 </script>
