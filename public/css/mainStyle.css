@@ -18,7 +18,10 @@
     transition: .3s ease-out;
 }
 #btnArea{
-    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 .banner-in{
     text-align: center;
@@ -26,13 +29,19 @@
 .leftBtn{
     border: none;
     background-color: transparent;
+    padding-top: 5px;
 }
 .rightBtn{
     border: none;
     background-color: transparent;
+    padding-top: 5px;
 }
 
-/*about페이지*/
+.bannerSlider:disabled{
+    background: aqua;
+}
+
+/*about페이지*/;
 #aboutPage{
     position: absolute;
     top: 30vh;

@@ -1,12 +1,17 @@
 <section id="mainArea">
     <div id="outer-banner">
         <div id="bannerArea">
-            <img class="banner-in" id="bannerImg" src="image/Myauction_banner.png">
-            <img class="banner-in" id="bannerImg" src="image/banner_second.jpg">
+            <img class="banner-in" src="image/Myauction_banner.png">
+            <img class="banner-in" src="image/banner_second.jpg">
+            <img class="banner-in" src="image/Myauction_banner.png">
+            <img class="banner-in" src="image/banner_second.jpg">
+            <img class="banner-in" src="image/Myauction_banner.png">
+            <img class="banner-in" src="image/banner_second.jpg">
         </div>
     </div>
     <div id="btnArea">
         <button class="leftBtn"><img src="image/left_button_img.svg"></button>
+        <input class="bannerSlider" type="range" min="0" disabled>
         <button class="rightBtn"><img src="image/right_button_img.svg"></button>
     </div>
 
@@ -20,24 +25,33 @@
     const inners = document.getElementsByClassName('banner-in');
     const leftBtn = document.getElementsByClassName('leftBtn');
     const rightBtn = document.getElementsByClassName('rightBtn');
+    const slider = document.getElementsByClassName('bannerSlider');
 
-    for(inner of inners){
+    const sliderStep = parseInt(100 / inners.length);
+    slider[0].max = sliderStep * inners.length;
+    slider[0].value = sliderStep;
+    slider[0].step = sliderStep;
+
+    for (inner of inners) {
         inner.style.width = `${outer.clientWidth}px`;
     }
-    
+
     list.style.width = `${outer.clientWidth * inners.length}px;`;
-    leftBtn[0].addEventListener("click", function(){
-        curIndex--;
-        if(curIndex < 0) curIndex = 0;
-        list.style.marginLeft = `-${outer.clientWidth * curIndex}px`;
+    leftBtn[0].addEventListener("click", function () {
+        if (curIndex != 0) {
+            curIndex--;
+            list.style.marginLeft = `-${outer.clientWidth * curIndex}px`;
+            slider[0].value = sliderStep * (curIndex + 1);
+        }
     })
 
-    rightBtn[0].addEventListener('click', function(){
-        curIndex++;
-        if(curIndex >= inners.length) curIndex = inners.length - 1;
-        list.style.marginLeft = `-${outer.clientWidth * curIndex}px`;
+    rightBtn[0].addEventListener('click', function () {
+        if (curIndex != inners.length - 1) {
+            curIndex++;
+            list.style.marginLeft = `-${outer.clientWidth * curIndex}px`;
+            slider[0].value = sliderStep * (curIndex + 1);
+        }
     })
 
-   
-      
+
 </script>

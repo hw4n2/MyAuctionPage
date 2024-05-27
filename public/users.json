@@ -131,7 +131,7 @@
         "expire_date": "2024-05-27",
         "expire_time": "17:15",
         "imgName": "429b49e5-7f78-4e08-ae9a-776cef1f3fd7.jpg",
-        "isExpired": false,
+        "isExpired": true,
         "bidders": []
       }
     ]
