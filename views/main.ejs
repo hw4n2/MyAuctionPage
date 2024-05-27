@@ -1,3 +1,43 @@
 <section id="mainArea">
-    <img id="bannerImg" src="image/Myauction_banner.png">
+    <div id="outer-banner">
+        <div id="bannerArea">
+            <img class="banner-in" id="bannerImg" src="image/Myauction_banner.png">
+            <img class="banner-in" id="bannerImg" src="image/banner_second.jpg">
+        </div>
+    </div>
+    <div id="btnArea">
+        <button class="leftBtn"><img src="image/left_button_img.svg"></button>
+        <button class="rightBtn"><img src="image/right_button_img.svg"></button>
+    </div>
+
 </section>
+
+
+<script>
+    let curIndex = 0;
+    const outer = document.getElementById('outer-banner');
+    const list = document.getElementById('bannerArea');
+    const inners = document.getElementsByClassName('banner-in');
+    const leftBtn = document.getElementsByClassName('leftBtn');
+    const rightBtn = document.getElementsByClassName('rightBtn');
+
+    for(inner of inners){
+        inner.style.width = `${outer.clientWidth}px`;
+    }
+    
+    list.style.width = `${outer.clientWidth * inners.length}px;`;
+    leftBtn[0].addEventListener("click", function(){
+        curIndex--;
+        if(curIndex < 0) curIndex = 0;
+        list.style.marginLeft = `-${outer.clientWidth * curIndex}px`;
+    })
+
+    rightBtn[0].addEventListener('click', function(){
+        curIndex++;
+        if(curIndex >= inners.length) curIndex = inners.length - 1;
+        list.style.marginLeft = `-${outer.clientWidth * curIndex}px`;
+    })
+
+   
+      
+</script>

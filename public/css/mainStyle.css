@@ -1,14 +1,41 @@
 /*메인페이지*/
-#bannerImg{
-    position: relative;
-    top: 11vh;
-    left: -110px;
+#mainArea{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 20%;
 }
+#outer-banner{
+    top: 10%;
+    width: 99vw;
+    overflow-x: hidden;
+    margin: 0 auto;
+}
+#bannerArea{
+    display: flex;
+    transition: .3s ease-out;
+}
+#btnArea{
+    
+}
+.banner-in{
+    text-align: center;
+}
+.leftBtn{
+    border: none;
+    background-color: transparent;
+}
+.rightBtn{
+    border: none;
+    background-color: transparent;
+}
+
 /*about페이지*/
 #aboutPage{
     position: absolute;
     top: 30vh;
-
 }
 
 #aboutText{
