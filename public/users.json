@@ -97,6 +97,10 @@
         "isExpired": false,
         "bidders": [
           {
+            "id": "admin",
+            "price": "455"
+          },
+          {
             "id": "admin3",
             "price": "3"
           },

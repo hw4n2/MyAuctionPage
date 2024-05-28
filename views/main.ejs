@@ -5,11 +5,13 @@
             <img class="banner-in" src="image/banner_second.jpg">
             <img class="banner-in" src="image/Myauction_banner.png">
             <img class="banner-in" src="image/banner_second.jpg">
+            <img class="banner-in" src="image/Myauction_banner.png">
+            <img class="banner-in" src="image/banner_second.jpg">
         </div>
     </div>
     <div id="btnArea">
         <button class="leftBtn"><img src="image/left_button_img.svg"></button>
-        <input class="bannerSlider" type="range" disabled>
+        <input class="bannerSlider" type="range">
         <button class="rightBtn"><img src="image/right_button_img.svg"></button>
     </div>
 
@@ -33,41 +35,69 @@
         inner.style.width = `${outer.clientWidth}px`;
     }
 
-    list.style.width = `${outer.clientWidth * inners.length}px;`;
+    list.style.width = `${outer.clientWidth * inners.length}px`;
+    var tmp;
+    var m;
     leftBtn[0].addEventListener("click", function () {
         if (curIndex != 0) {
             curIndex--;
             list.style.marginLeft = `-${outer.clientWidth * curIndex}px`;
-            moveThumb('left', slider[0].value);
+            tmp = parseInt(slider[0].value);
+            leftBtn[0].disabled = true;
+            clearInterval(m);
+            m = setInterval(moveSlider, 10, 'left');
         }
+        leftBtn[0].disabled = false;
     })
 
     rightBtn[0].addEventListener('click', function () {
         if (curIndex != inners.length - 1) {
             curIndex++;
             list.style.marginLeft = `-${outer.clientWidth * curIndex}px`;
-            moveThumb('right', slider[0].value);
+            tmp = parseInt(slider[0].value);
+            rightBtn[0].disabled = true;
+            clearInterval(m);
+            m = setInterval(moveSlider, 10, 'right');
         }
+        rightBtn[0].disabled = false;
     })
 
-    const timer = ms => new Promise(res => setTimeout(res, ms));
-    async function moveThumb(direction, val) {
+    slider[0].addEventListener('input', function () {
+        clearInterval(m);
+        curIndex = Math.round(parseInt(slider[0].value) / sliderStep);
+        console.log(curIndex);
+
+        updateBanner();
+    });
+    
+    function updateBanner() {
+        list.style.marginLeft = `-${outer.clientWidth * curIndex}px`;
+        slider[0].value = sliderStep * curIndex;
+        leftBtn[0].disabled = false;
+        rightBtn[0].disabled = false;
+    }
+
+    function moveSlider(direction) {
         if (direction == 'left') {
-            let tmp = val;
-            for (let i = tmp; i >= tmp - sliderStep; i--) {
-                slider[0].value = i;
-                await timer(10);
+            if (parseInt(slider[0].value) <= parseInt(tmp) - parseInt(sliderStep)) {
+                console.log(curIndex);
+                clearInterval(m);
+                leftBtn[0].disabled = false;
+            }
+            else {
+                slider[0].value = parseInt(slider[0].value) - 1;
             }
         }
         else if (direction == 'right') {
-            const tmp = val;
-            for (let i = val; i <= val + sliderStep; i++) {
-                console.log(i);
-                if (i >= tmp + sliderStep) return;
-                slider[0].value = i;
-                await timer(10);
-                tmp = i;
+            if (parseInt(slider[0].value) >= parseInt(tmp) + parseInt(sliderStep)){
+                console.log(curIndex);
+                clearInterval(m);
+                rightBtn[0].disabled = false;
             }
+            else {
+                slider[0].value = parseInt(slider[0].value) + 1;
+            }
+
         }
     }
 
