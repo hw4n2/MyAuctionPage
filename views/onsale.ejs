@@ -39,7 +39,6 @@
         }
     }
 
-    console.log(parsedList);
     const container = document.getElementById("itemArea");
     for (const item of parsedList) {
         const newDiv = document.createElement('div');
@@ -60,16 +59,18 @@
         const dDay = document.createElement('div');
         dDay.className = 'dDayTag';
         dDay.textContent = to_Dday(item.expire_date);
+        dDay.classList.add('has-text');
         const isMine = document.createElement('div');
         isMine.className = 'isMineTag';
         if (item.id == cookieId) isMine.textContent = '내 상품';
         else isMine.textContent = `경매중`;
+        isMine.classList.add('has-text');
         const bidNum = document.createElement('div');
         bidNum.className = 'bidNum';
         if(item.bidders.length != 0){
             bidNum.textContent = `응찰 ${item.bidders.length}`;
+            bidNum.classList.add('has-text');
         }
-        else bidNum.textContent = '';
         infoHeader.append(dDay, isMine, bidNum);
 
         const newName = document.createElement('div');//제목
@@ -82,7 +83,7 @@
 
         const newPrice = document.createElement('div');//가격
         newPrice.className = 'itemPrice';
-        newPrice.textContent = `정가 : ${item.productPrice} 원`;
+        newPrice.textContent = `정가 : KRW ${item.productPrice}`;
 
         const periodDate = document.createElement('div');//마감기간
         periodDate.className = 'itemPeriod';
@@ -94,12 +95,13 @@
         const to_detail = document.createElement('div');
         to_detail.className = 'to_detailBtn';
         to_detail.textContent = '상세보기';
+        to_detail.style = "cursor: pointer;"
 
         infoDiv.append(infoHeader, nullDiv, newName, newId, newPrice, periodDate, to_detail);
         newDiv.append(imgContainer, infoDiv);
         container.appendChild(newDiv);
 
-        newDiv.addEventListener("click", function () {
+        to_detail.addEventListener("click", function () {
             const form = document.createElement('form');
             form.method = 'POST';
             form.action = "/itemDetails";

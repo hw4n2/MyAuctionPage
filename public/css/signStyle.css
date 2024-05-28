@@ -1,5 +1,6 @@
-#loginFormArea, #signUpFormArea{
-    display:flex;
+#loginFormArea,
+#signUpFormArea {
+    display: flex;
     gap: 20px;
     column-gap: 20px;
     flex-direction: column;
@@ -10,25 +11,38 @@
 }
 
 /*로그인*/
-#loginText{
+#loginText {
     font-size: 40px;
     padding: 150px 50px 20px 50px;
 }
-#idInput{
+
+#idInput {
     width: 500px;
     height: 45px;
     font-size: 20px;
     padding-left: 10px;
-    border-radius: 4px;
+    border-radius: 3px;
+    border: 2px solid grey;
 }
-#pwInput, #_pwInput{
+
+#pwInput,
+#_pwInput {
     width: 500px;
     height: 45px;
     font-size: 20px;
     padding-left: 10px;
-    border-radius: 4px;
+    border-radius: 3px;
+    border: 2px solid grey;
 }
-#loginBtn{
+
+#idInput:hover,
+#pwInput:hover,
+#_pwInput:hover,
+#nameInput:hover {
+    border: 2px solid black;
+}
+
+#loginBtn {
     width: 515px;
     height: 55px;
     font-size: 18px;
@@ -38,51 +52,63 @@
     color: white;
     padding: 13px 8px 12px 7px;
     text-align: center;
+    cursor: pointer;
 }
-#_to_signUp{
+
+#_to_signUp {
     color: black;
     font-size: 16px;
 }
 
 /*회원가입*/
-#signUpText{
+#signUpText {
     width: 465px;
     height: 50px;
     font-size: 40px;
     padding: 95px 50px 40px 0px;
     text-align: left;
     border-bottom: 1px solid black;
-    display:flex;
+    display: flex;
     flex-direction: row;
     justify-content: end;
 }
-#signUpBtn{
+
+#signUpBtn {
     width: 515px;
     height: 55px;
     font-size: 18px;
     border-radius: 4px;
     border: none;
-    background-color: #48d1cc;
-    color: white;
-    padding: 13px 8px 12px 7px;
+    padding: 13px 8px 13px 7px;
     margin-top: 30px;
     text-align: center;
+    color: #777;
+    background-color: rgb(223, 223, 223);
 }
-.infoLabel{
+
+#signUpBtn.enabled {
+    background-color: #48d1cc;
+    color: white;
+}
+
+.infoLabel {
     width: 512px;
     height: 20px;
     font-size: 21px;
     text-align: left;
     padding-top: 5px;
 }
-#nameInput{
+
+#nameInput {
     width: 500px;
     height: 45px;
     font-size: 20px;
     padding-left: 10px;
     border-radius: 4px;
+    border: 2px solid grey;
 }
-#phoneNumInput{
+
+#phoneNumInput {
     width: 500px;
     height: 45px;
     font-size: 20px;

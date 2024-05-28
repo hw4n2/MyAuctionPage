@@ -9,7 +9,7 @@
     const cookieId = '<%= userId %>';
     const itemList = '<%- JSON.stringify(itemList) %>';
     const parsedList = JSON.parse(itemList);
-    if(parsedList.length == 0){
+    if (parsedList.length == 0) {
         const container = document.getElementById('itemArea');
         container.append(document.createElement('div').textContent = '아직 경매가 종료된 상품이 없습니다.');
         container.style = "display:flex; justify-content: center; top: 20%";
@@ -60,16 +60,19 @@
         const dDay = document.createElement('div');
         dDay.className = 'dDayTag';
         dDay.textContent = to_Dday(item.expire_date);
+        dDay.classList.add('has-text');
         const isMine = document.createElement('div');
         isMine.className = 'isMineTag';
-        if (item.id == cookieId) isMine.textContent = '내 상품';
-        else isMine.textContent = ``;
+        if (item.id == cookieId) {
+            isMine.textContent = '내 상품';
+            isMine.classList.add('has-text');
+        }
         const bidNum = document.createElement('div');
         bidNum.className = 'bidNum';
-        if(item.bidders.length != 0){
+        if (item.bidders.length != 0) {
             bidNum.textContent = `낙찰`;
+            bidNum.classList.add('has-text');
         }
-        else bidNum.textContent = '';
         infoHeader.append(dDay, isMine, bidNum);
 
         const newName = document.createElement('div');//제목
@@ -82,7 +85,7 @@
 
         const newPrice = document.createElement('div');//가격
         newPrice.className = 'itemPrice';
-        newPrice.textContent = `정가 : ${item.productPrice} 원`;
+        newPrice.textContent = `정가 : KRW ${item.productPrice}`;
 
         const periodDate = document.createElement('div');//마감기간
         periodDate.className = 'itemPeriod';

@@ -44,6 +44,7 @@ img {
     height: 60px;
     position: relative;
     left: 50px;
+    cursor: pointer;
 }
 
 
@@ -72,11 +73,13 @@ img {
     row-gap: 10px;
     padding-top: 15px;
     padding-right: 20px;
+    height: 25px;
 }
 
 .headerElement {
     color: grey;
     font-size: 14px;
+    cursor: pointer;
 }
 
 /*nav*/
@@ -85,6 +88,7 @@ img {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    gap: 5%;
     height: 40px;
     padding-bottom: 10px;
     border-bottom: 1px solid #bcbcbc;
@@ -94,9 +98,14 @@ img {
 
 .navBtn {
     height: 40px;
-    width: 300px;
+    width: 250px;
     padding-bottom: 10px;
     font-size: 23px;
     text-align: center;
     display: block;
+    cursor: pointer;
+}
+
+.navBtn:hover {
+    border-bottom: 2px solid black;
 }

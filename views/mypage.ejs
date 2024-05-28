@@ -47,6 +47,7 @@
             else status = '[경매중]';
             item.innerHTML = `${status} ${to_Dday(itemIter.expire_date)}
 ${itemIter.productName} | 응찰 ${itemIter.bidders.length}<hr>`;
+            item.style="cursor: pointer;"
             itemContainer.appendChild(item);
 
             item.addEventListener('click', function () {
@@ -68,7 +69,7 @@ ${itemIter.productName} | 응찰 ${itemIter.bidders.length}<hr>`;
 
     if (parsedUser.notices.length == 0) {
         const noticeBox = document.createElement('div');
-        noticeBox.innerHTML = '응찰 결과가 없습니다.<hr>';
+        noticeBox.innerHTML = '응찰 결과가 없습니다.';
         noticeContainer.appendChild(noticeBox);
     }
     else {

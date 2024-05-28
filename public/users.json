@@ -137,7 +137,76 @@
         "imgName": "429b49e5-7f78-4e08-ae9a-776cef1f3fd7.jpg",
         "isExpired": true,
         "bidders": []
+      },
+      {
+        "productName": "ㅁㄴㅇㄻㄴㄹ",
+        "productDetails": "adsf",
+        "productPrice": "3124321",
+        "expire_date": "2024-05-30",
+        "expire_time": "22:49",
+        "imgName": "c3f1cc2e-f61d-41a8-b792-48dea8bb70bd.jpg",
+        "isExpired": false,
+        "bidders": [
+          {
+            "id": "admin",
+            "price": "14124"
+          }
+        ]
+      },
+      {
+        "productName": "daf",
+        "productDetails": "asdf",
+        "productPrice": "231",
+        "expire_date": "2024-05-31",
+        "expire_time": "16:22",
+        "imgName": "fd16e7e0-7199-4b14-90a4-e96336333b1a.jpg",
+        "isExpired": false,
+        "bidders": []
       }
     ]
+  },
+  {
+    "id": "kjh",
+    "name": "d",
+    "password": "$2b$10$tZMKWSyu6FfUuF1zy0cqXOhM5u2swnvFAnNZVDfRMxNkgyotquNVq",
+    "notices": [],
+    "items": [
+      {
+        "productName": "ㅇㅇ",
+        "productDetails": "ㅇㅇ",
+        "productPrice": "123",
+        "expire_date": "2024-05-29",
+        "expire_time": "01:04",
+        "imgName": "06f25d02-064d-4610-8922-9bc175e3ef16.jpg",
+        "isExpired": true,
+        "bidders": []
+      },
+      {
+        "productName": "d",
+        "productDetails": "d",
+        "productPrice": "1",
+        "expire_date": "2024-05-29",
+        "expire_time": "07:53",
+        "imgName": "e943df0c-4a1b-4355-8736-318f161b3f40.webp",
+        "isExpired": false,
+        "bidders": [
+          {
+            "id": "admin",
+            "price": "5"
+          },
+          {
+            "id": "admin",
+            "price": "2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ㅇ",
+    "name": "d",
+    "password": "$2b$10$KU82uFsgbF6iDu6Doo8T6ugm3uk3eics2R3HeBxf7WJbHMajpipHK",
+    "notices": [],
+    "items": []
   }
 ]

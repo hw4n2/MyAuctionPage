@@ -98,7 +98,7 @@ async function checkExpiration() {
             let itemTime = new Date(users[i].items[j].expire_date + " " + users[i].items[j].expire_time + ":00");
             if (timeValue.getTime() >= itemTime.getTime()) {
                 users[i].items[j].isExpired = true;
-                console.log("[Auction expired] "  + users[i].id + ", " +  users[i].items[j].productName);
+                console.log("[Auction expired] " + users[i].id + ", " + users[i].items[j].productName);
                 isModified = true;
 
                 let alreadySent = [];
@@ -192,10 +192,13 @@ app.get('/mypage', async (req, res) => {
     })
 })
 app.post('/signUpSubmit', async (req, res) => {
-    const { id, password, name } = req.body;
+    const { id, password, _password, name } = req.body;
     const exist = await fetchUser(id);
     if (exist) {
         return res.render('alert', { error: '이미 사용중인 아이디 입니다.' });
+    }
+    if (password != _password) {
+        return res.render('alert', { error: '비밀번호가 일치하지 않습니다.' });
     }
 
     const newUser = { id, name }; //유저정보(쿠키)

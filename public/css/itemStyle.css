@@ -34,7 +34,12 @@ td {
 
 .sellFormText {
   font-size: 40px;
-  padding: 150px 50px 20px 50px;
+  width: 100%;
+  height: 100%;
+}
+
+.sellFormInput {
+  margin-left: 5%;
 }
 
 #productName {
@@ -63,15 +68,14 @@ td {
 #period_result {
   color: grey;
 }
-  
+
 #productPrice {
   width: 450px;
 }
 
 #won {}
 
-#productImage {
-}
+#productImage {}
 
 #sellBtn {
   width: 300px;
@@ -88,14 +92,15 @@ td {
 
 /*판매페이지 스타일*/
 
-#CAContainer{
+#CAContainer {
   display: flex;
   flex-direction: row;
   position: absolute;
   top: 150px;
   height: 100vh;
 }
-#sidebox{
+
+#sidebox {
   position: fixed;
   top: 350px;
   left: 40px;
@@ -106,7 +111,8 @@ td {
   text-align: center;
 
 }
-#curPageTitle{
+
+#curPageTitle {
   position: fixed;
   font-size: 40px;
   left: 11vw;
@@ -117,7 +123,8 @@ td {
   background-color: white;
   z-index: 1;
 }
-#itemArea{
+
+#itemArea {
   position: absolute;
   z-index: -1;
   left: 11vw;
@@ -129,21 +136,23 @@ td {
   grid-template-columns: repeat(2, 1fr);
 }
 
-.imgContainer{
+.imgContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   flex: 2 1 0;
   padding-right: 20px;
 }
-.itemImg{
+
+.itemImg {
   height: auto;
   max-height: 90%;
   max-width: 90%;
   object-fit: contain;
 }
-.itemContainer{
-  display:flex;
+
+.itemContainer {
+  display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   height: 55vh;
@@ -151,35 +160,71 @@ td {
   padding-top: 20px;
   padding-bottom: 30px;
 }
-.infoContainer{
+
+.infoContainer {
   display: flex;
   flex-direction: column;
-  flex: 1 1 0;  
+  flex: 1 1 0;
   gap: calc(3vh + 1px);
   height: 50vh;
   padding-top: 10%;
   padding-left: 30px;
-  border-left: 1px solid grey; 
+  border-left: 1px solid grey;
   object-fit: contain;
 }
 
-.to_detailBtn{
+.to_detailBtn {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(85, 85, 85);;
+  color: rgb(85, 85, 85);
+  ;
   border: 1px solid rgb(210, 210, 210);
   border-radius: 2px;
   height: 10%;
   padding-bottom: 3px;
 }
 
-.itemPeriod{
-  
+.dDayTag {
+  color: #777;
+  background-color: rgb(223, 223, 223);
+  border-radius: 3px;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.isMineTag {
+  color: white;
+  background-color: #48d1cc;
+  border-radius: 3px;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bidNum {
+  color: #ff0000;
+  background-color: rgba(255, 0, 0, 0.08);
+  border-radius: 3px;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bidNum.has-text,
+.isMineTag.has-text,
+.dDayTag.has-text {
+  padding: 0px 3px;
+}
+
+.itemPeriod {}
+
 /*상세페이지 스타일*/
-#detailArea{
+#detailArea {
   display: flex;
   flex-direction: row;
   position: absolute;
@@ -190,7 +235,7 @@ td {
 
 }
 
-._imgContainer{
+._imgContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -198,16 +243,20 @@ td {
   padding-right: 10px;
   padding-bottom: 1%;
 }
-._itemImg{
+
+._itemImg {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  cursor: pointer;
 }
-.formContainer{
+
+.formContainer {
   flex: 1 1 0;
-  
+
 }
-._infoContainer{
+
+._infoContainer {
   display: flex;
   flex-direction: column;
   gap: calc(3vh + 10px);
@@ -215,36 +264,46 @@ td {
   object-fit: contain;
   padding-bottom: 1%;
   height: 85%;
-  padding-top: 20%;
+  padding-top: 15%;
 }
-._infoHeader{
-  display:flex;
+
+._infoHeader {
+  display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   padding-bottom: 5%;
   border-bottom: 1px solid grey;
 
 }
-._itemName{
 
-}
-._userId_item{
+._itemName {}
 
-}
-._itemPrice{
+._userId_item {}
 
-}
-._bidNum{
+._itemPrice {}
 
-}
-._itemPeriod{
-
+._bidNum {
+  color: red;
 }
 
+._itemPeriod {}
+
+.buyBtn {
+  width: 515px;
+  height: 55px;
+  font-size: 18px;
+  border-radius: 4px;
+  border: none;
+  background-color: #48d1cc;
+  color: white;
+  padding: 13px 8px 12px 7px;
+  text-align: center;
+  cursor: pointer;
+}
 
 /*마이페이지*/
 
-#mypageArea{
+#mypageArea {
   position: fixed;
   display: flex;
   flex-direction: row;
@@ -256,7 +315,7 @@ td {
   width: 80%;
 }
 
-#userInfoContainer{
+#userInfoContainer {
   position: static;
   display: flex;
   flex-direction: column;
@@ -271,7 +330,8 @@ td {
 
 }
 
-#myItemContainer, #noticeContainer{
+#myItemContainer,
+#noticeContainer {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -280,20 +340,22 @@ td {
   padding: 2%;
   overflow: auto;
 }
-#myItemContainer::-webkit-scrollbar, #noticeContainer::-webkit-scrollbar{
+
+#myItemContainer::-webkit-scrollbar,
+#noticeContainer::-webkit-scrollbar {
   display: block;
 }
-#myItemContainer::-webkit-scrollbar-thumb, #noticeContainer::-webkit-scrollbar-thumb{
+
+#myItemContainer::-webkit-scrollbar-thumb,
+#noticeContainer::-webkit-scrollbar-thumb {
   background-color: #2f3542;
   border-radius: 10px;
   background-clip: padding-box;
   border: 2px solid transparent;
 }
-#myItemContainer::-webkit-scrollbar-track, #noticeContainer::-webkit-scrollbar-track{
+
+#myItemContainer::-webkit-scrollbar-track,
+#noticeContainer::-webkit-scrollbar-track {
   background-color: grey;
   border-radius: 3px;
 }
-
-
-
-

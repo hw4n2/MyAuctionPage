@@ -4,26 +4,26 @@
         <table>
             <tr>
                 <td><label class="sellFormText" for="productName">제품명</label></td>
-                <td><input id="productName" type="text" name="productName" placeholder="판매하시는 상품의 제품명만 입력해 주세요" required></td>
+                <td><input class="sellFormInput" id="productName" type="text" name="productName" placeholder="판매하시는 상품의 제품명만 입력해 주세요" required></td>
             </tr>
             <tr>
                 <td><label class="sellFormText" for="productDetails" id="detailsText">상세설명<br><br><br><br><br></label></td>
-                <td><textarea id="productDetails" type="text" name="productDetails" placeholder="구매시기, 실사용 기간, 상품 하자 등 판매하시는 상품의 상태를 자세히 입력해 주세요" required></textarea></td>
+                <td><textarea class="sellFormInput" id="productDetails" type="text" name="productDetails" placeholder="구매시기, 실사용 기간, 상품 하자 등 판매하시는 상품의 상태를 자세히 입력해 주세요" required></textarea></td>
             </tr>
             <tr>
-                <td><label class="sellFormText">제품 정가</label></td>
-                <td><input id="productPrice" type="number" name="productPrice" placeholder="숫자만 입력해 주세요" required>&emsp;&nbsp;&emsp;&nbsp;원</td>
+                <td><label class="sellFormText" for="productPrice">제품 정가</label></td>
+                <td><input class="sellFormInput" id="productPrice" type="number" name="productPrice" placeholder="숫자만 입력해 주세요" required>&nbsp;&nbsp;원</td>
             </tr>
             <tr>
                 <td><label class="sellFormText">경매 마감일</label></td>
                 <td>
-                    <input id="expire_date" type="date" name="expire_date" required>&emsp;
+                    <input class="sellFormInput" id="expire_date" type="date" name="expire_date" required>&emsp;
                     <input id="expire_time" type="time" name="expire_time" required>
                 </td>
             </tr>
             <tr>
                 <td><label class="sellFormText">상품 사진 등록</label></td>
-                <td><input id="productImage" type="file" name="productImage" required></td>
+                <td><input class="sellFormInput" id="productImage" type="file" name="productImage" required></td>
             </tr>
         </table>
         <button id="sellBtn">상품 등록</button>
