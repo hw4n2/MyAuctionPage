@@ -183,6 +183,7 @@ td {
   border-radius: 2px;
   height: 10%;
   padding-bottom: 3px;
+  cursor: pointer;
 }
 
 .dDayTag {
@@ -264,7 +265,7 @@ td {
   object-fit: contain;
   padding-bottom: 1%;
   height: 85%;
-  padding-top: 15%;
+  padding-top: 5%;
 }
 
 ._infoHeader {

@@ -100,6 +100,10 @@
         "bidders": [
           {
             "id": "admin",
+            "price": "456"
+          },
+          {
+            "id": "admin",
             "price": "455"
           },
           {
