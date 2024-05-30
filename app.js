@@ -6,7 +6,11 @@ const fs = require('fs').promises;
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const uuid4 = require('uuid4');
-const { time } = require('console');
+const connect = require('./models');
+const User = require('./models/user.js');
+connect();
+
+
 
 const app = express();
 
@@ -15,7 +19,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());
-console.log('hello');
 
 const upload = multer({
     storage: multer.diskStorage({
