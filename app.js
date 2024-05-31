@@ -6,9 +6,9 @@ const fs = require('fs').promises;
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const uuid4 = require('uuid4');
-const connect = require('./models');
+const connectDB = require('./models');
 const User = require('./models/user.js');
-connect();
+connectDB();
 
 
 
@@ -415,5 +415,5 @@ app.get('/about', (req, res) => {
 
 
 app.listen(3000, () => {
-    console.log("server opened on port 3000");
+    console.log("Server Operating: http://localhost:3000");
 });

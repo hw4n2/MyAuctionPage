@@ -4,7 +4,8 @@
     "name": "김정환",
     "password": "$2b$10$n3tmc5nUb3Z9lj.JVH5puuw1aS6xlas4.g2dqdtWLVF2m0S70kmgS",
     "notices": [
-      "[낙찰] d, kjh | 낙찰가 : 5 원<br>종료일시: 2024-05-29 07:53"
+      "[낙찰] d, kjh | 낙찰가 : 5 원<br>종료일시: 2024-05-29 07:53",
+      "[낙찰] ㅁㄴㅇㄻㄴㄹ, admin3 | 낙찰가 : 14124 원<br>종료일시: 2024-05-30 22:49"
     ],
     "items": [
       {
@@ -151,7 +152,7 @@
         "expire_date": "2024-05-30",
         "expire_time": "22:49",
         "imgName": "c3f1cc2e-f61d-41a8-b792-48dea8bb70bd.jpg",
-        "isExpired": false,
+        "isExpired": true,
         "bidders": [
           {
             "id": "admin",
