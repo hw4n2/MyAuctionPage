@@ -3,9 +3,9 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const ejs = require('ejs');
 const fs = require('fs').promises;
-//const connectDB = require('./models');
-//const User = require('./models/userDB.js');
-//connectDB();
+const connectDB = require('./models');
+const userDB = require('./models/userDB.js');
+connectDB();
 const app = express();
 
 app.use('/user', require('./routes/user.js'));
@@ -21,18 +21,12 @@ app.use(express.json());
 const dbFile = 'public/users.json';
 const USER_COOKIE_KEY = 'USER';
 
-async function fetchAllUsers() {
-    const data = await fs.readFile(dbFile);
-    const users = JSON.parse(data.toString());
-    return users; //객체로 구성된 배열 리턴
-}
-
 async function checkExpiration() {
     var today = new Date();
     var dateString = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
     var timeString = ('0' + today.getHours()).slice(-2) + ':' + ('0' + today.getMinutes()).slice(-2) + ":00";
     var timeValue = new Date(dateString + " " + timeString);
-    const users = await fetchAllUsers();
+    const users = await userDB.find({});
 
     let isModified = false;
     for (let i = 0; i < users.length; i++) {
@@ -65,7 +59,7 @@ async function checkExpiration() {
         }
     }
     if (isModified) {
-        await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
+        await users.save();
     }
 };
 

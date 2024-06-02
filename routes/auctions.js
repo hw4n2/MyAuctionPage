@@ -7,9 +7,9 @@ const fs = require('fs').promises;
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const uuid4 = require('uuid4');
-//const connectDB = require('./models');
-//const User = require('./models/user.js');
-//connectDB();
+const connectDB = require('../models');
+const userDB = require('../models/userDB.js');
+connectDB();
 
 router.use(express.static(path.join(__dirname, 'public')));
 router.use(express.urlencoded({ extended: true }));
@@ -40,25 +40,16 @@ async function fetchAllUsers() {
     return users; //객체로 구성된 배열 리턴
 }
 async function fetchUser(id) {
-    const users = await fetchAllUsers();
-    const user = users.find((user) => user.id === id);
+    const user = await userDB.find({id: id});
     return user; //객체 리턴
 }
-async function createUser(newUser) {
-    const hashedPassword = await bcrypt.hash(newUser.password, 10);
-    const users = await fetchAllUsers();
-    users.push({
-        ...newUser,
-        password: hashedPassword,
-    });
-    await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
-}
+
 async function appendProductData(userId, productData) {
-    const users = await fetchAllUsers();
-    const user = users.find((user) => user.id === userId);
+    const user = await fetchUser(userId);
+    console.log(user[0]);
     productData.bidders = [];
-    user.items.push(productData);
-    user.items.sort((a, b) => {
+    user[0].items.push(productData);
+    user[0].items.sort((a, b) => {
         const dateA = new Date(a.expire_date + " " + a.expire_time);
         const dateB = new Date(b.expire_date + " " + b.expire_time);
         const now = new Date();
@@ -69,7 +60,7 @@ async function appendProductData(userId, productData) {
         return diffA - diffB;
     })
 
-    await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
+    await user[0].save();
 }
 
 async function appendBidder(bidder, itemData) {
@@ -87,7 +78,7 @@ async function checkExpiration() {
     var dateString = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
     var timeString = ('0' + today.getHours()).slice(-2) + ':' + ('0' + today.getMinutes()).slice(-2) + ":00";
     var timeValue = new Date(dateString + " " + timeString);
-    const users = await fetchAllUsers();
+    const users = await userDB.find({});
 
     let isModified = false;
     for (let i = 0; i < users.length; i++) {
@@ -120,7 +111,7 @@ async function checkExpiration() {
         }
     }
     if (isModified) {
-        await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
+        await users.save();
     }
 };
 async function extractItems(status) {
