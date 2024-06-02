@@ -16,19 +16,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 
-    
+
 </head>
 
 <body>
-    
-   <%- include(userExist) %>
-   <%- include(filename) %>
-   <script>
-    var message = '<%= message %>';
-    if(message != 'none'){//필요한 경우 res.render메소드에서 alert메시지 전달
-        alert(message);
-    }
-</script>
+
+    <%- include(userExist) %>
+        <%- include(filename) %>
+            <script>
+                var message = '<%= message %>';
+                if (message != 'none') {//필요한 경우 url쿼리 이용해 alert메시지 전달
+                    alert(message);
+                }
+                if (window.history.replaceState) {
+                    const url = new URL(window.location);
+                    url.searchParams.delete('message');
+                    window.history.replaceState({}, document.title, url.pathname);
+                }
+            </script>
 </body>
 
 </html>

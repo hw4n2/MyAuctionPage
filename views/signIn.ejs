@@ -1,4 +1,4 @@
-<form method="post" action="/signInSubmit">
+<form method="post" action="/user/signInSubmit">
     <section id="loginFormArea">
         <div id="loginText">로그인</div>
         <div>
@@ -16,7 +16,7 @@
     document.addEventListener("DOMContentLoaded", function () {
         let _signUpBtn = document.getElementById("_to_signUp");
         _signUpBtn.addEventListener("click", function () {
-            window.location.href = '/signUp';
+            window.location.href = '/user/signUp';
         });
     })
 </script>

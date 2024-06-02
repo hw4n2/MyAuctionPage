@@ -13,10 +13,10 @@
     imgContainer.className = '_imgContainer';
     const detailImg = document.createElement('img');
     detailImg.className = '_itemImg';
-    detailImg.src = `uploads/${item.imgName}`;
+    detailImg.src = `../uploads/${item.imgName}`;
     imgContainer.appendChild(detailImg);
     imgContainer.addEventListener("click", function () {
-        window.open(`uploads/${item.imgName}`);
+        window.open(`../uploads/${item.imgName}`);
     })
 
     const infoDiv = document.createElement('div');
@@ -121,7 +121,7 @@
     const form = document.createElement('form');
     form.className = 'formContainer';
     form.method = 'POST';
-    form.action = '/bid';
+    form.action = '/auctions/bid';
     form.onsubmit = function submitConfirm() {
         if (cookieId == item.id) {
             alert('본인의 상품에는 응찰할 수 없습니다.');

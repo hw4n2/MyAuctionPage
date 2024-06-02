@@ -53,7 +53,7 @@ ${itemIter.productName} | 응찰 ${itemIter.bidders.length}<hr>`;
             item.addEventListener('click', function () {
                 const form = document.createElement('form');
                 form.method = 'POST';
-                form.action = "/itemDetails";
+                form.action = "/auctions/itemDetails";
                 const input = document.createElement('input');
                 input.type = 'hidden';
                 input.name = 'item';
