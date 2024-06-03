@@ -14,15 +14,4 @@
         <div class="navBtn" id="to_about">About</div>
     </nav>
 </div>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let mypageBtn = document.getElementById("to_mypage");
-        mypageBtn.addEventListener('click', function(){
-            window.location.href = '/user/myPage';
-        });
-        let logOutBtn = document.getElementById("to_logOut");
-        logOutBtn.addEventListener("click", function () {
-            window.location.href = '/user/logOutClicked';
-        });
-    })
-</script>
+<script src="/script/login_yesScript.js"></script>

@@ -24,12 +24,12 @@ async function checkExpiration() {
                     const user = users.find((user) => user.id === users[i].items[j].bidders[k].id);
                     let notice;
                     if (k == 0) {
-                        notice = `[낙찰] ${users[i].items[j].productName}, ${users[i].id} | 낙찰가 : ${users[i].items[j].bidders[k].price} 원<br>종료일시: ${users[i].items[j].expire_date} ${users[i].items[j].expire_time}`;
+                        notice = `[낙찰] ${users[i].items[j].productName}, ${users[i].id} | 낙찰가 : ${parseInt(users[i].items[j].bidders[k].price).toLocaleString()} 원<br>종료일시: ${users[i].items[j].expire_date} ${users[i].items[j].expire_time}`;
                         alreadySent.push(users[i].items[j].bidders[k].id);
                     }
                     else {
                         if (alreadySent.find((id) => id == users[i].items[j].bidders[k].id)) continue;
-                        notice = `[낙찰실패] ${users[i].items[j].productName}, ${users[i].id} | 낙찰자 : ${users[i].items[j].bidders[0].id} | 낙찰가 : ${users[i].items[j].bidders[0].price} 원<br>종료일시: ${users[i].items[j].expire_date} ${users[i].items[j].expire_time}`
+                        notice = `[낙찰실패] ${users[i].items[j].productName}, ${users[i].id} | 낙찰자 : ${users[i].items[j].bidders[0].id} | 낙찰가 : ${parseInt(users[i].items[j].bidders[0].price).toLocaleString()} 원<br>종료일시: ${users[i].items[j].expire_date} ${users[i].items[j].expire_time}`
                         alreadySent.push(users[i].items[j].bidders[k].id);
                     }
                     user.notices.push(notice);

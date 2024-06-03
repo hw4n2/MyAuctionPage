@@ -7,11 +7,4 @@
     <%- include(itemPage) %>
 </section>
 
-<script>
-    document.getElementById("onsale").addEventListener("click", function () {
-        window.location.href = '/auctions/curAuctions';
-    })
-    document.getElementById("expired").addEventListener("click", function () {
-        window.location.href = '/auctions/expiredPage';
-    })
-</script>
+<script src="/script/curAuctionsScript.js"></script>
