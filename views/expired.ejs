@@ -88,7 +88,7 @@
 
         const newPrice = document.createElement('div');//가격
         newPrice.className = 'itemPrice';
-        newPrice.textContent = `정가 : KRW ${item.productPrice}`;
+        newPrice.textContent = `정가 : KRW ${parseInt(item.productPrice).toLocaleString()}`;
 
         const periodDate = document.createElement('div');//마감기간
         periodDate.className = 'itemPeriod';
@@ -104,7 +104,7 @@
         infoDiv.append(infoHeader, newName, newId, newPrice);
         if(item.bidders.length != 0){
             const bidPrice = document.createElement('div');
-            bidPrice.textContent = `낙찰가 : KRW ${item.bidders[0].price}`;
+            bidPrice.textContent = `낙찰가 : KRW ${parseInt(item.bidders[0].price).toLocaleString()}`;
             bidPrice.style = "color: red;"
             infoDiv.append(bidPrice, periodDate, to_detail);
         }

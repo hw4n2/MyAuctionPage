@@ -83,7 +83,7 @@
 
         const newPrice = document.createElement('div');//가격
         newPrice.className = 'itemPrice';
-        newPrice.textContent = `정가 : KRW ${item.productPrice}`;
+        newPrice.textContent = `정가 : KRW ${parseInt(item.productPrice).toLocaleString()}`;
 
         const periodDate = document.createElement('div');//마감기간
         periodDate.className = 'itemPeriod';

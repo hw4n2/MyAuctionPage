@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-//const itemSchema = require('./itemDB.js').schema;
 
 const userSchema = new mongoose.Schema({
     id: { type: String, required: true, unique: true},
