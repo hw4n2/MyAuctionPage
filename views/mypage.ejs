@@ -39,6 +39,17 @@
         itemContainer.appendChild(item);
     }
     else {
+        parsedUser.items.sort((a, b) => {
+            const dateA = new Date(a.expire_date + " " + a.expire_time);
+            const dateB = new Date(b.expire_date + " " + b.expire_time);
+            const now = new Date();
+    
+            const diffA = Math.abs(dateA - now);
+            const diffB = Math.abs(dateB - now);
+    
+            return diffB - diffA;
+        })
+        
         for (let i = 0; i < parsedUser.items.length; i++) {
             const itemIter = parsedUser.items[i];
             const item = document.createElement('div');

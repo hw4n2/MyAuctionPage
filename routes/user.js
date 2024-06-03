@@ -20,7 +20,7 @@ const USER_COOKIE_KEY = 'USER';
 
 async function fetchUser(id) {
     const user = await userDB.find({id: id});
-    return user;
+    return user[0];
 }
 async function createUser(newUser) {
     const hashedPassword = await bcrypt.hash(newUser.password, 10);
@@ -35,7 +35,6 @@ async function checkExpiration() {
     var timeString = ('0' + today.getHours()).slice(-2) + ':' + ('0' + today.getMinutes()).slice(-2) + ":00";
     var timeValue = new Date(dateString + " " + timeString);
     const users = await userDB.find({});
-
     let isModified = false;
     for (let i = 0; i < users.length; i++) {
         for (let j = 0; j < users[i].items.length; j++) {
@@ -67,7 +66,10 @@ async function checkExpiration() {
         }
     }
     if (isModified) {
-        await users.save();
+        for(const user of users){
+            user.markModified('items');
+            await user.save();
+        }
     }
 };
 
@@ -89,12 +91,12 @@ router.get('/signUp', (req, res) => {
     });
 });
 router.get('/mypage', async (req, res) => {
-    const user = req.cookies[USER_COOKIE_KEY];
-    if (!user) {
+    const userId = req.cookies[USER_COOKIE_KEY];
+    if (!userId) {
         return res.render('alert', { error: '오류가 발생했습니다. 다시 시도해 해주세요.' });
     }
-    const userData = await fetchUser(JSON.parse(user));
-
+    const userData = await userDB.findOne({id: JSON.parse(userId)});
+    console.log(userData);
     res.render("index", {
         userExist: 'login_yes.ejs',
         filename: 'mypage.ejs',
@@ -105,11 +107,11 @@ router.get('/mypage', async (req, res) => {
 })
 router.post('/signUpSubmit', async (req, res) => {
     const { id, password, _password, name } = req.body;
-    const exist = await fetchUser(id);
+    const exist = await userDB.findOne({id: id});
     if (password != _password) {
         return res.render('alert', { error: '비밀번호가 일치하지 않습니다.' });
     }
-    if (exist.length != 0) {
+    if (exist) {
         return res.render('alert', { error: '이미 사용중인 아이디 입니다.' });
     }
 
@@ -118,9 +120,8 @@ router.post('/signUpSubmit', async (req, res) => {
     newUser.password = password;
     newUser.notices = [];
     newUser.items = [];
-    console.log(newUser);
     await createUser(newUser);
-    console.log("registered");
+    console.log("[signup]" + newUser.id);
     return res.redirect(`/?message=${encodeURIComponent(`${newUser.id}님, 회원가입되었습니다.`)}`);
 });
 
@@ -128,7 +129,7 @@ router.post('/signInSubmit', async (req, res) => {
     checkExpiration();
     const { id, password } = req.body;
     const exist = await fetchUser(id);
-    if (exist.length == 1) {
+    if (exist) {
         if (await bcrypt.compare(password, exist.password)) {
             res.cookie(USER_COOKIE_KEY, JSON.stringify(exist.id));
             console.log("[log in] " + id);

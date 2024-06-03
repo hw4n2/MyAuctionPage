@@ -27,7 +27,6 @@ async function checkExpiration() {
     var timeString = ('0' + today.getHours()).slice(-2) + ':' + ('0' + today.getMinutes()).slice(-2) + ":00";
     var timeValue = new Date(dateString + " " + timeString);
     const users = await userDB.find({});
-
     let isModified = false;
     for (let i = 0; i < users.length; i++) {
         for (let j = 0; j < users[i].items.length; j++) {
@@ -59,7 +58,10 @@ async function checkExpiration() {
         }
     }
     if (isModified) {
-        await users.save();
+        for(const user of users){
+            user.markModified('items');
+            await user.save();
+        }
     }
 };
 

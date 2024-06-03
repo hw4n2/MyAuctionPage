@@ -34,22 +34,12 @@ const uploadMiddleware = upload.single('productImage');
 const dbFile = 'public/users.json';
 const USER_COOKIE_KEY = 'USER';
 
-async function fetchAllUsers() {
-    const data = await fs.readFile(dbFile);
-    const users = JSON.parse(data.toString());
-    return users; //객체로 구성된 배열 리턴
-}
-async function fetchUser(id) {
-    const user = await userDB.find({id: id});
-    return user; //객체 리턴
-}
 
 async function appendProductData(userId, productData) {
-    const user = await fetchUser(userId);
-    console.log(user[0]);
+    const user = await userDB.findOne({id: userId});
     productData.bidders = [];
-    user[0].items.push(productData);
-    user[0].items.sort((a, b) => {
+    user.items.push(productData);
+    user.items.sort((a, b) => {
         const dateA = new Date(a.expire_date + " " + a.expire_time);
         const dateB = new Date(b.expire_date + " " + b.expire_time);
         const now = new Date();
@@ -60,17 +50,16 @@ async function appendProductData(userId, productData) {
         return diffA - diffB;
     })
 
-    await user[0].save();
+    await user.save();
 }
 
 async function appendBidder(bidder, itemData) {
-    const users = await fetchAllUsers();
-    const userItems = users.find(user => user.id === itemData.id).items;
-    const item = userItems.find(item => item.imgName === itemData.imgName);
+    const user = await userDB.findOne({id: itemData.id});
+    const item = user.items.find(item => item.imgName === itemData.imgName);
     item.bidders.push(bidder);
     item.bidders.sort((a, b) => parseInt(a.price) >= parseInt(b.price) ? -1 : 1);
-
-    await fs.writeFile(dbFile, JSON.stringify(users, null, 2));
+    user.markModified('items');
+    await user.save();
 }
 
 async function checkExpiration() {
@@ -79,7 +68,6 @@ async function checkExpiration() {
     var timeString = ('0' + today.getHours()).slice(-2) + ':' + ('0' + today.getMinutes()).slice(-2) + ":00";
     var timeValue = new Date(dateString + " " + timeString);
     const users = await userDB.find({});
-
     let isModified = false;
     for (let i = 0; i < users.length; i++) {
         for (let j = 0; j < users[i].items.length; j++) {
@@ -111,12 +99,15 @@ async function checkExpiration() {
         }
     }
     if (isModified) {
-        await users.save();
+        for(const user of users){
+            user.markModified('items');
+            await user.save();
+        }
     }
 };
 async function extractItems(status) {
     const itemList = [];
-    const users = await fetchAllUsers();
+    const users = await userDB.find({});
     for (const user of users) {
         for (const item of user.items) {
             if (item.isExpired == status) {
