@@ -23,10 +23,23 @@ app.use(express.json());
 const dbFile = 'public/users.json';
 const USER_COOKIE_KEY = 'USER';
 
+async function extractItems(status) {
+    const itemList = [];
+    const users = await userDB.find({});
+    for (const user of users) {
+        for (const item of user.items) {
+            if (item.isExpired == status) {
+                item.id = user.id;
+                itemList.push(item);
+            }
+        }
+    }
+    return itemList;
+}
 
-
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     checkExpiration();
+    const itemList = await extractItems(false);
     const userCookie = req.cookies[USER_COOKIE_KEY];
     let message = req.query.message;
     if(!message) message = 'none';
@@ -36,6 +49,7 @@ app.get('/', (req, res) => {
             userExist: 'login_yes.ejs',
             filename: 'main.ejs',
             userId: userData,
+            itemList: itemList,
             message: message
         });
     }
@@ -43,6 +57,7 @@ app.get('/', (req, res) => {
         userExist: 'login_no.ejs',
         filename: 'main.ejs',
         userId: 'none',
+        itemList: itemList,
         message: message
     });
 });

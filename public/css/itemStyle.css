@@ -116,7 +116,7 @@ td {
   position: fixed;
   font-size: 40px;
   left: 11vw;
-  top: 15vh;
+  top: 14vh;
   width: 88%;
   height: 80px;
   padding-top: 5vh;
@@ -310,7 +310,7 @@ td {
   flex-direction: row;
   gap: 3%;
   row-gap: 4%;
-  top: 230px;
+  top: 290px;
   left: 12vw;
   height: 65vh;
   width: 80%;

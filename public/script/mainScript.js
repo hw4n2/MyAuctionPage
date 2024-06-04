@@ -79,3 +79,10 @@ function moveSlider(direction) {
 
     }
 }
+
+
+const leftMain = document.getElementById('leftBtn_main');
+const rightMain = document.getElementById('rightBtn_main');
+const itemArea = document.getElementById('mainItemArea');
+const parsedList = JSON.parse(itemList);
+console.log(parsedList);
