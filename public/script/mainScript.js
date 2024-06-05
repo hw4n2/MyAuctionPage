@@ -85,4 +85,12 @@ const leftMain = document.getElementById('leftBtn_main');
 const rightMain = document.getElementById('rightBtn_main');
 const itemArea = document.getElementById('mainItemArea');
 const parsedList = JSON.parse(itemList);
-console.log(parsedList);
+for(item of parsedList){
+    const imgContainer = document.createElement('div');
+    const img = document.createElement('img');
+    img.className = 'mainImg';
+    imgContainer.className = 'mainImgContainer';
+    img.src = `/uploads/${item.imgName}`;
+    imgContainer.appendChild(img);
+    itemArea.appendChild(imgContainer);
+}
