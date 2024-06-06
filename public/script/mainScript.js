@@ -80,12 +80,10 @@ function moveSlider(direction) {
     }
 }
 
-
-const leftMain = document.getElementById('leftBtn_main');
-const rightMain = document.getElementById('rightBtn_main');
-const itemArea = document.getElementById('mainItemArea');
+const outerArea = document.getElementById('mainDisplay');
+const itemArea = document.getElementById('mainItemInner');
 const parsedList = JSON.parse(itemList);
-for(item of parsedList){
+parsedList.forEach(function(item) {
     const imgContainer = document.createElement('div');
     const img = document.createElement('img');
     img.className = 'mainImg';
@@ -93,4 +91,44 @@ for(item of parsedList){
     img.src = `/uploads/${item.imgName}`;
     imgContainer.appendChild(img);
     itemArea.appendChild(imgContainer);
-}
+
+    img.addEventListener('click', function () {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = "/auctions/itemDetails";
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'item';
+        input.value = JSON.stringify(item);
+        form.appendChild(input);
+
+        document.body.appendChild(form);
+        form.submit();
+    });
+});
+
+const cloneBanner = itemArea.cloneNode(true);
+cloneBanner.id = "innerClone";
+outerArea.appendChild(cloneBanner);
+
+const clonedImg = cloneBanner.querySelectorAll('img');
+let index = 0;
+parsedList.forEach(function(item) {
+    clonedImg[index].addEventListener('click', function () {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = "/auctions/itemDetails";
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'item';
+        input.value = JSON.stringify(item);
+        form.appendChild(input);
+
+        document.body.appendChild(form);
+        form.submit();
+    });
+    index++;
+});
+
+itemArea.classList.add('original');
+cloneBanner.classList.add('clone');
