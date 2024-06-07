@@ -6,7 +6,6 @@ const fs = require('fs').promises;
 const connectDB = require('./models');
 const userDB = require('./models/userDB.js');
 const checkExpiration = require('./routes//checkExpiration.js');
-
 connectDB();
 const app = express();
 
@@ -20,7 +19,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());
 
-const dbFile = 'public/users.json';
 const USER_COOKIE_KEY = 'USER';
 
 async function extractItems(status) {
