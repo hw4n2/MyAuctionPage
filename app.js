@@ -81,7 +81,7 @@ app.get('/about', (req, res) => {
     }
     return res.render("index", {
         userExist: 'login_no.ejs',
-        filename: 'about.ejs',
+        filename: 'about.ejs', 
         userId: 'none',
         message: 'none'
     });
