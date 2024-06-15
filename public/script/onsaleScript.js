@@ -4,7 +4,7 @@ if (parsedList.length == 0) {
     container.append(document.createElement('div').textContent = '아직 상품이 없습니다. 직접 입찰해 보세요!');
     container.style = "display:flex; justify-content: center; top: 20%";
 }
-parsedList.sort((a, b) => {
+parsedList.sort((a, b) => { //전시할 상품 남은 기간 오름차순 정렬
     const dateA = new Date(a.expire_date + " " + a.expire_time);
     const dateB = new Date(b.expire_date + " " + b.expire_time);
     const now = new Date();

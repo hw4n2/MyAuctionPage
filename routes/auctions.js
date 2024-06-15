@@ -62,7 +62,7 @@ async function appendBidder(bidder, itemData) {
 }
 
 
-async function extractItems(status) {
+async function extractItems(status) { //경매중or만료된 상품을 선택적으로 db에서 골라오는 함수
     const itemList = [];
     const users = await userDB.find({});
     for (const user of users) {
@@ -76,7 +76,7 @@ async function extractItems(status) {
     return itemList;
 }
 
-router.get('/curAuctions', async (req, res) => {
+router.get('/curAuctions', async (req, res) => { //현재 경매중인 상품 페이지
     checkExpiration();
     const user = req.cookies[USER_COOKIE_KEY];
     const itemList = await extractItems(false);
@@ -101,7 +101,7 @@ router.get('/curAuctions', async (req, res) => {
         message: 'none'
     });
 });
-router.get('/expiredPage', async (req, res) => {
+router.get('/expiredPage', async (req, res) => { //경매가 종료된 상품 페이지
     checkExpiration();
     const user = req.cookies[USER_COOKIE_KEY];
     const itemList = await extractItems(true);
@@ -128,7 +128,7 @@ router.get('/expiredPage', async (req, res) => {
 });
 
 
-router.get('/sells', (req, res) => {
+router.get('/sells', (req, res) => { //상품 등록 페이지 접근
     const user = req.cookies[USER_COOKIE_KEY];
     if (user) {
         const userData = JSON.parse(user);
@@ -142,7 +142,7 @@ router.get('/sells', (req, res) => {
     }
     return res.render('alert', { error: '로그인 후 이용해 주세요.' });
 });
-router.post('/upload', uploadMiddleware, async (req, res) => {
+router.post('/upload', uploadMiddleware, async (req, res) => { //상품 등록(입찰)
     const user = req.cookies[USER_COOKIE_KEY];
     const userId = JSON.parse(user);
     if (!user) {
@@ -157,7 +157,7 @@ router.post('/upload', uploadMiddleware, async (req, res) => {
     console.log("[sell] " + userId + ", " + userProduct.productName);
     return res.redirect(`/?message=${encodeURIComponent('상품 등록이 완료되었습니다.')}`);
 })
-router.post('/itemDetails', async (req, res) => {
+router.post('/itemDetails', async (req, res) => { //상품 상세페이지
     const user = req.cookies[USER_COOKIE_KEY];
     if (user) {
         const userId = JSON.parse(user);
@@ -176,7 +176,7 @@ router.post('/itemDetails', async (req, res) => {
     }
 })
 
-router.post('/bid', async (req, res) => {
+router.post('/bid', async (req, res) => {//응찰버튼 클릭 시
 
     const user = req.cookies[USER_COOKIE_KEY];
     if (user) {

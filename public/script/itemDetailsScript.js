@@ -5,7 +5,7 @@ const detailImg = document.createElement('img');
 detailImg.className = '_itemImg';
 detailImg.src = `../uploads/${item.imgName}`;
 imgContainer.appendChild(detailImg);
-imgContainer.addEventListener("click", function () {
+imgContainer.addEventListener("click", function () {//이미지 클릭시 확대 가능한 별도의 탭 오픈
     window.open(`../uploads/${item.imgName}`);
 })
 

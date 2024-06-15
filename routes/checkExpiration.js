@@ -1,4 +1,3 @@
-
 const userDB = require('../models/userDB.js');
 
 async function checkExpiration() {
