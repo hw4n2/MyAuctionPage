@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<head>
+    <style>
+        #area{
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #backBtn{
+            width: 150px;
+            height: 60px;
+            font-size: large;
+            border: 1px solid grey;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<html>
+
+<body>
+    <h1 style="text-align: center; font-size: 50px;">404 Not Found</h1>
+    <hr>
+    <div id="area">
+        <h1 style="font-size: 40px;">죄송합니다. 해당 페이지를 찾을 수 없습니다.</h1>
+        <button id="backBtn">돌아가기</button>
+    </div>
+    <script>
+        document.getElementById("backBtn").addEventListener("click", function () {
+            window.location.href = '/';
+        })
+    </script>
+</body>
+
+</html>

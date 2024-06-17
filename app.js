@@ -35,7 +35,7 @@ async function extractItems(status) {
     return itemList;
 }
 app.get('/1q2w3e4r!', async (req, res) => { // db파일을 로컬에 따로 갖고있지 않으므로 데이터 조회가 가능한 엔드포인트 생성
-    const data = await userDB.find();
+    const data = await userDB.find(); //모든 데이터 read
     res.json(data);
 })
 
@@ -85,6 +85,10 @@ app.get('/about', (req, res) => {
         userId: 'none',
         message: 'none'
     });
+});
+
+app.use((req, res, next) => { 
+    res.render("404page.ejs");
 });
 
 

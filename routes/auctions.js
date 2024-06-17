@@ -182,13 +182,12 @@ router.post('/bid', async (req, res) => {//응찰버튼 클릭 시
     if (user) {
         const userId = JSON.parse(user);
 
-        const price = req.body.priceInput;
-        const itemData = JSON.parse(req.body.item);
+        const price = req.body.priceInput; //사용자가 입력한 응찰가
+        const itemData = JSON.parse(req.body.item); //어떤 상품에 응찰했는지 확인용, 응찰자를 추가하기 위한 상품정보
         const bidder = {};
         bidder.id = userId;
         bidder.price = price;
         await appendBidder(bidder, itemData);
-        const itemList = await extractItems(false);
 
         return res.redirect('/auctions/bid/success');
         
